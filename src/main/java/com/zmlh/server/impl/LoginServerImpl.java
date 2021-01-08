@@ -8,11 +8,13 @@ import com.zmlh.entity.Response;
 import com.zmlh.mapper.LoginMapper;
 import com.zmlh.mapper.UserMapper;
 import com.zmlh.myexception.LoginException;
+import com.zmlh.until.AbstractExceptionHandler;
 import com.zmlh.server.LoginServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+
 
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +29,7 @@ import java.util.Objects;
 @Service
 @Slf4j
 @SuppressWarnings("all")
-public class LoginServerImpl implements LoginServer {
+public class LoginServerImpl extends AbstractExceptionHandler implements LoginServer {
     @Autowired
     private LoginMapper loginMapper;
     @Autowired

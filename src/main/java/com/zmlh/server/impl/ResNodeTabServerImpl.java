@@ -8,8 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 /**
  * @ClassName ResNodeTabServerImpl
  * @Description TODO
@@ -35,13 +33,9 @@ public class ResNodeTabServerImpl implements ResNodeTabServer {
 
     @Override
     public Response insert ( ResNodeTab resNodeTab ) {
-        if (resNodeTabMapper.selectById(resNodeTab.getId()) == null) {
-            resNodeTab.setId(creatId());
-            return new Response().setCode(200).setObject(resNodeTabMapper.insert(resNodeTab));
-        }
-        return update(resNodeTab);
-
+        return insert(resNodeTabMapper, resNodeTab, resNodeTab.getId());
     }
+
 
     @Override
     public Response update ( ResNodeTab resNodeTab ) {

@@ -34,12 +34,7 @@ public class RoleServerImpl implements RoleServer {
 
     @Override
     public Response insert ( ResRoleTab resRoleTab ) {
-        if (roleMapper.selectById(resRoleTab.getId()) == null) {
-            resRoleTab.setId(creatId());
-            resRoleTab.setCreateTime(Instant.now()).setUpdateTime(Instant.now());
-            return new Response().setCode(200).setObject(roleMapper.insert(resRoleTab));
-        }
-        return update(resRoleTab);
+        return insert(roleMapper, resRoleTab, resRoleTab.getId());
     }
 
     @Override

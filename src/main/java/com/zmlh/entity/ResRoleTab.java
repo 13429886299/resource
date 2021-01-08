@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
 import java.time.Instant;
 
 /**
@@ -33,9 +32,18 @@ public class ResRoleTab {
     @Length(max = 64, min = 1)
     private String roleName;
 
+    @TableField(value = "roletype")
+    @NotNull
+    private Integer roleType;
+
+    /**
+     * 用于显示菜单栏
+     */
+
     @TableField(value = "level")
     @NotNull
     private Integer level;
+
 
     @TableField(value = "createtime")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")

@@ -7,6 +7,8 @@ import com.zmlh.server.UserServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+
 /**
  * @ClassName UserServerImpl
  * @Description TODO
@@ -31,7 +33,12 @@ public class UserServerImpl implements UserServer {
 
     @Override
     public Response insert ( ResUserTab resUserTab ) {
-        return new Response().setCode(200).setObject(userMapper.insert(resUserTab));
+        if (userMapper.selectById(resUserTab.getId()) == null) {
+            resUserTab.setId(creatId());
+            resUserTab.setCreateTime(Instant.now()).setUpdateTime(Instant.now());
+            return new Response().setCode(200).setObject(userMapper.insert(resUserTab));
+        }
+        return update(resUserTab);
     }
 
     @Override

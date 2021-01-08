@@ -3,6 +3,7 @@ package com.zmlh.server;
 import com.zmlh.entity.DictAllInfo;
 import com.zmlh.entity.DictInfo;
 import com.zmlh.entity.Response;
+import com.zmlh.until.BaseDatabaseInterface;
 
 /**
  * @Interface DictServer

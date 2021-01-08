@@ -1,18 +1,15 @@
-package com.zmlh.server;
+package com.zmlh.until;
 
 import com.zmlh.entity.Response;
 
-import java.util.UUID;
-
 /**
- * @ClassName BaseDatabaseInterface
+ * @Interface DataBaseCommonInterface
  * @Description TODO
  * @Author tyh
- * @Date 2021-01-06 11:27
+ * @Date 2021-01-08 9:44
  * @Version 1.0
  **/
-public interface BaseDatabaseInterface<T> {
-
+public interface DataBaseCommonInterface<T> {
     Response getAll ();
 
     Response getAllById ( String id );
@@ -22,8 +19,4 @@ public interface BaseDatabaseInterface<T> {
     Response update ( T t );
 
     Response delete ( String id );
-
-    default String creatId () {
-        return UUID.randomUUID().toString().substring(0, 63);
-    }
 }

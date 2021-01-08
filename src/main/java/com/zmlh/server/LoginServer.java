@@ -2,7 +2,6 @@ package com.zmlh.server;
 
 import com.zmlh.entity.LoginInfo;
 import com.zmlh.entity.Response;
-import com.zmlh.myexception.LoginException;
 
 /**
  * @Interface LoginServer
@@ -11,7 +10,7 @@ import com.zmlh.myexception.LoginException;
  * @Date 2021-01-07 10:39
  * @Version 1.0
  **/
-public interface LoginServer extends ExceptionHandler {
+public interface LoginServer   {
 
     Response login ( LoginInfo loginInfo );
 }

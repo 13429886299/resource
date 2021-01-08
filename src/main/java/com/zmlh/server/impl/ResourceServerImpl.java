@@ -7,10 +7,12 @@ import com.zmlh.entity.StudentInfoTab;
 import com.zmlh.mapper.ResNodeTabMapper;
 import com.zmlh.mapper.StudentMapper;
 import com.zmlh.server.ResourceServer;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +38,7 @@ public class ResourceServerImpl implements ResourceServer {
         List<ResultResource> resultResourceList = new ArrayList<>();
         List<ResNodeTab> resNodeTabList = resNodeTabMapper.selectList(null);
         List<StudentInfoTab> studentInfoTabList = studentMapper.selectList(null);
-        Map<String, StudentInfoTab> studentInfoTabMap = listToMap(studentInfoTabList);
+        Map<String, StudentInfoTab> studentInfoTabMap = listToMap(studentInfoTabList, "id");
         if (resNodeTabList.size() > 0) {
             resNodeTabList.forEach(resNodeTab -> {
                 Map<String, Object> map = new HashMap<>();
@@ -74,13 +76,6 @@ public class ResourceServerImpl implements ResourceServer {
     public Response delete ( String id ) {
         return null;
     }
-
-    private Map<String, StudentInfoTab> listToMap ( List<StudentInfoTab> studentInfoTabList ) {
-        Map<String, StudentInfoTab> map = new HashMap<>(16);
-        studentInfoTabList.forEach(studentInfoTab -> map.put(studentInfoTab.getId(), studentInfoTab));
-        return map;
-    }
-
 
     private void student ( Map<String, Object> map, Map<String, StudentInfoTab> studentInfoTabMap, String id ) {
         StudentInfoTab studentInfoTab = studentInfoTabMap.get(id);

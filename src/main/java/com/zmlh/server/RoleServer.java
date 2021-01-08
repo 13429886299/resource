@@ -1,6 +1,7 @@
 package com.zmlh.server;
 
 import com.zmlh.entity.ResRoleTab;
+import com.zmlh.until.BaseDatabaseInterface;
 
 /**
  * @ClassName RoleServer
