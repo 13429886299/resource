@@ -43,9 +43,9 @@ public class RecordLessonServerImpl implements RecordLessonServer {
     private List<ResRecordLessonTab> get () {
         List<ResRecordLessonTab> resRecordLessonTabList = recordLessonMapper.selectList(null);
         List<StudentInfoTab> studentInfoTabList = studentMapper.selectList(null);
-        Map<String, StudentInfoTab> studentMap = listToMap(studentInfoTabList, "id");
+        Map<String, StudentInfoTab> studentMap = listToMap(studentInfoTabList, ID);
         List<ResUserTab> userList = userMapper.selectList(null);
-        Map<String, ResUserTab> userMap = listToMap(userList, "id");
+        Map<String, ResUserTab> userMap = listToMap(userList, ID);
         QueryWrapper<DictAllInfo> query = new QueryWrapper<>();
         query.eq(ID, 2);
         List<DictAllInfo> dictList = dictAllInfoMapper.selectList(query);
@@ -66,7 +66,7 @@ public class RecordLessonServerImpl implements RecordLessonServer {
     public Response getAllById ( String id ) {
         return new Response().setCode(200).setObject(
                 get().stream()
-                        .filter(resRecordLessonTab -> resRecordLessonTab.getId().equals(id))
+                        .filter(resRecordLessonTab -> resRecordLessonTab.getStudentId().equals(id))
                         .findAny()
                         .orElse(new ResRecordLessonTab())
         );
