@@ -1,3 +1,12 @@
+GET http://127.0.0.1:8003/zmlh/record/721c1534-18d4-459d-8c68-9f78aa0dafe8
+Content-Type: application/json
+
+{"id":"10","roleName":"10","level":1}
+
+<> 2021-01-08T065446.200.json
+
+###
+
 GET http://127.0.0.1:8003/zmlh/record/all
 Content-Type: application/json
 
@@ -434,15 +443,6 @@ Content-Type: application/json
 {   "id": "2",     "roleName": "2" }
 
 <> 2021-01-06T032133.200.json
-
-###
-
-POST http://127.0.0.1:8003/zmlh/role/insert
-Content-Type: application/json
-
-{   "id": "2",     "roleName": "3" }
-
-<> 2021-01-06T032103.200.json
 
 ###
 

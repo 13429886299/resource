@@ -7,12 +7,10 @@ import com.zmlh.entity.StudentInfoTab;
 import com.zmlh.mapper.ResNodeTabMapper;
 import com.zmlh.mapper.StudentMapper;
 import com.zmlh.server.ResourceServer;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
