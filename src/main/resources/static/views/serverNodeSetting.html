@@ -1,0 +1,45 @@
+<link href="css/severNodeSetting.css" rel="stylesheet">
+<div id="nodeInfo-in" ng-controller="serverNodeSettingController">
+    <div id="serverLabel">
+        <table id="serverLabelTab">
+            <tr>
+                <td><label>节 点 ID:</label></td>
+                <td><input class="input_text" type="text" ng-model="nodeInfo.nodeId" id="nodeId"
+                           placeholder="请输入节点ID"><span
+                        class="importantFlag">*</span></td>
+            </tr>
+            <tr>
+                <td><label>节点名称:</label></td>
+                <td><input class="input_text" type="text" maxlength="32" ng-model="nodeInfo.nodeName"
+                           id="nodeName"
+                           placeholder="请输入节点名称"><span
+                        class="importantFlag">*</span></td>
+            </tr>
+            <tr>
+                <td><label>节 点 IP:</label></td>
+                <td><input class="input_text" type="text" ng-model="nodeInfo.nodeIp" id="nodeIp"
+                           placeholder="请输入节点IP"><span
+                        class="importantFlag">*</span></td>
+            </tr>
+            <tr>
+                <td><label>节点端口:</label></td>
+                <td>
+                    <input class="input_text" type="text" ng-model="nodeInfo.nodePort" id="nodePort"
+                           placeholder="请输入节点端口"><span
+                        class="importantFlag">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td><label>节点描述:</label></td>
+                <td><input class="input_text" type="text" ng-model="nodeInfo.nodeDesc" id="nodeDesc"
+                           maxlength="64"
+                           placeholder="请输入节点描述"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="btn-node">
+        <button class="button_save" ng-click="save()">保存</button>
+        <button class="button_cancel" ng-click="clear()">清空</button>
+    </div>
+
+</div>

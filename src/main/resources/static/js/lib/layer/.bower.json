@@ -1,0 +1,24 @@
+{
+  "name": "layer",
+  "main": "src/layer.js",
+  "version": "v3.1.1",
+  "homepage": "https://github.com/sentsin/layer",
+  "authors": [
+    "sentsin <xu@sentsin.com>"
+  ],
+  "description": "弹窗组件",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "keywords": [
+    "layer",
+    "layui",
+    "dialog"
+  ],
+  "license": "MIT",
+  "_source": "nexus+http://192.168.100.133:8081/repository/fxbower/layer",
+  "_target": "^v3.1.1",
+  "_release": "v3.1.1",
+  "_originalSource": "layer"
+}

@@ -1,0 +1,22 @@
+.textbox .textbox-text {
+    font-size: 15px;
+}
+
+.timeLabelTab tr {
+    line-height: 28px;
+}
+
+.timeLabelTab td {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.timing {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#btn-node {
+    margin-top: 10px;
+    margin-left: 220px;
+}

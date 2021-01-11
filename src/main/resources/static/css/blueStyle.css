@@ -1,0 +1,525 @@
+/********************************************主页面标题栏**************************************************/
+.titlebar {
+    height: 8%;
+    background: url("../images/login/title.png") no-repeat;
+    background-size: cover;
+    color: white;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.titleUser{
+
+}
+.titleExit{
+
+}
+.titleChangePassword{
+
+}
+.titleTextColor{
+    color: #0E2854;
+}
+.logo span {
+    font-size: 25pt;
+    letter-spacing: 4px;
+    vertical-align: middle;
+    color: #BBF3F9;
+}
+
+.user {
+    height: 100%;
+    text-align: right;
+}
+
+.user a {
+    margin-left: 10px;
+    font-size: 16pt;
+    vertical-align: middle;
+}
+
+.user a:hover {
+    color: white;
+}
+/********************************************主页面菜单栏*************************************************/
+.navigation1 {
+    width: 16%;
+    float: left;
+    background-color: #0c1c44;
+    font-size: 16px;
+    color: #BBDEE9;
+}
+
+/***************************************************/
+@media screen and (max-width: 1921px){
+    .menu-p1 {
+        color: #BBDEE9;
+        margin-right: 50px;
+    }
+    .menu-p2 {
+        color: #BBDEE9;
+        margin-right: 35px;
+    }
+    .submenu a {
+        display: block;
+        text-decoration: none;
+        color: #BBDEE9;
+        padding: 12px 24%;
+        text-align: left;
+        -webkit-transition: all 0.25s ease;
+        -o-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+    }
+}
+@media screen and (max-width: 1840px){
+    .menu-p1 {
+        color: #BBDEE9;
+        margin-right: 40px;
+    }
+    .menu-p2 {
+        color: #BBDEE9;
+        margin-right: 28px;
+    }
+    .submenu a {
+        display: block;
+        text-decoration: none;
+        color: #BBDEE9;
+        padding: 12px 24%;
+        text-align: left;
+        -webkit-transition: all 0.25s ease;
+        -o-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+    }
+}
+@media screen and (max-width: 1760px){
+    .menu-p1 {
+        color: #BBDEE9;
+        margin-right: 35px;
+    }
+    .menu-p2 {
+        color: #BBDEE9;
+        margin-right: 20px;
+    }
+    .submenu a {
+        display: block;
+        text-decoration: none;
+        color: #BBDEE9;
+        padding: 12px 24%;
+        text-align: left;
+        -webkit-transition: all 0.25s ease;
+        -o-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+    }
+}
+/*****************************************************/
+@media screen and (max-width: 1681px){
+    .menu-p1 {
+        color: #BBDEE9;
+        margin-right: 40px;
+        font-size: 14px;
+    }
+    .menu-p2 {
+        color: #BBDEE9;
+        margin-right: 25px;
+        font-size: 14px;
+    }
+    .submenu a {
+        display: block;
+        text-decoration: none;
+        color: #BBDEE9;
+        padding: 12px 50px;
+        font-size: 11px;
+        text-align: left;
+        -webkit-transition: all 0.25s ease;
+        -o-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+    }
+}
+
+@media screen and (max-width: 1655px){
+    .menu-p1 {
+        color: #BBDEE9;
+        margin-right: 30px;
+        font-size: 14px;
+    }
+    .menu-p2 {
+        color: #BBDEE9;
+        margin-right: 15px;
+        font-size: 14px;
+    }
+    .submenu a {
+        display: block;
+        text-decoration: none;
+        color: #BBDEE9;
+        padding: 12px 45px;
+        font-size: 11px;
+        text-align: left;
+        -webkit-transition: all 0.25s ease;
+        -o-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+    }
+}
+/***************************************************/
+@media screen and (max-width: 1601px){
+    .menu-p1 {
+        color: #BBDEE9;
+        margin-right: 25px;
+        font-size: 14px;
+    }
+    .menu-p2 {
+        color: #BBDEE9;
+        margin-right: 12px;
+        font-size: 14px;
+    }
+    .submenu a {
+        display: block;
+        text-decoration: none;
+        color: #BBDEE9;
+        padding: 12px 55px;
+        text-align: left;
+        -webkit-transition: all 0.25s ease;
+        -o-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+    }
+}
+
+@media screen and (max-width: 1500px){
+    .menu-p1 {
+        color: #BBDEE9;
+        margin-right: 20px;
+        font-size: 14px;
+    }
+    .menu-p2 {
+        color: #BBDEE9;
+        margin-right: 10px;
+        font-size: 14px;
+    }
+    .submenu a {
+        display: block;
+        text-decoration: none;
+        color: #BBDEE9;
+        padding: 12px 50px;
+        text-align: left;
+        -webkit-transition: all 0.25s ease;
+        -o-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+    }
+}
+/*************************************************/
+@media screen and (max-width: 1441px){
+    .menu-p1 {
+        color: #BBDEE9;
+        margin-right: 18px;
+        font-size: 12px;
+    }
+    .menu-p2 {
+        color: #BBDEE9;
+        margin-right: 8px;
+        font-size: 12px;
+    }
+    .submenu a {
+        display: block;
+        text-decoration: none;
+        color: #BBDEE9;
+        padding: 12px 40px;
+        font-size: 11px;
+        text-align: left;
+        -webkit-transition: all 0.25s ease;
+        -o-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+    }
+}
+
+@media screen and (max-width: 1375px){
+    .menu-p1 {
+        color: #BBDEE9;
+        margin-right: 15px;
+        font-size: 11px;
+    }
+    .menu-p2 {
+        color: #BBDEE9;
+        margin-right: 5px;
+        font-size: 11px;
+    }
+    .submenu a {
+        display: block;
+        text-decoration: none;
+        color: #BBDEE9;
+        padding: 12px 35px;
+        font-size: 11px;
+        text-align: left;
+        -webkit-transition: all 0.25s ease;
+        -o-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+    }
+}
+@media screen and (max-width: 1220px){
+    .menu-p1 {
+        color: #BBDEE9;
+        margin-right: 10px;
+        font-size: 11px;
+    }
+    .menu-p2 {
+        color: #BBDEE9;
+        margin-right: 3px;
+        font-size: 11px;
+    }
+    .submenu a {
+        display: block;
+        text-decoration: none;
+        color: #BBDEE9;
+        padding: 12px 30px;
+        font-size: 9px;
+        text-align: left;
+        -webkit-transition: all 0.25s ease;
+        -o-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+    }
+}
+
+.submenu {
+    padding: 0px;
+}
+
+.submenu a:hover {
+    background-color: #3063b5;
+}
+
+.submenu a:active {
+    background-color: #F79C23;
+}
+
+.navigation {
+    height: 100%;
+    box-shadow: #376b99 0px 0px 3px 0px;
+}
+
+.navigation-color{
+    background: #243D6B;
+}
+
+.panel {
+    background-color: #0c1c44;
+}
+
+.panel-heading {
+    padding: 15px 20px;
+    background-color: #0c1c44;
+}
+
+.submenu li {
+    border-bottom: 1px solid #0d0b22;
+}
+
+.panel-default > .panel-heading {
+    background-color: #0c1c44;
+    border-color: #0d0b22;
+}
+.panel-body {
+    padding: 0px;
+    border: none;
+    border-bottom: 1px solid #0d0b22;
+    background-color: #2558a5;
+}
+
+.panel-default {
+    border-color: #0d0b22;
+}
+
+.panel-group .panel + .panel {
+    margin: 0px;
+    border-bottom: solid 1px #0d0b22;
+}
+
+.panel-group .panel {
+    margin: 0px;
+    border-bottom: solid 1px #0d0b22;
+}
+
+/***************************************************主要内容部分********************************************/
+.maincontent {
+    /*color: #446AB7;*/
+}
+.contentborder {
+    width: 100%;
+    height: 100%;
+    box-shadow: #d7e2fe 2px 0px 17px 3px;
+    padding: 0 10px;
+}
+.content {
+    height: 92%;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: #FFFFFF;
+}
+.contentBack{
+    background-color: white;
+}
+/**************************************************对话框部分**********************************************/
+.layui-layer-rename .layui-layer-title{
+    background:#3063B5;
+    color:#fff;border:none
+}
+.layui-layer-rename .layui-layer-btn a{
+    background:#4697E8;
+    border-color:#4697E8;
+}
+.layui-layer-rename .layui-layer-btn .layui-layer-btn1{
+    background:#E9E7E7
+}
+
+.newTable {
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: 2px solid #cad8e8;
+}
+
+.newTable td {
+    height: 30px;
+    /*text-align: right;*/
+    border: solid 1px #fefeff;
+}
+.tdHead{
+    background-color: #E4EBF5;
+    width:120px;
+    text-align: right;
+}
+.node_table {
+    margin-left: 20px;
+    margin-top: 20px;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: 1px solid #cad8e8;
+    width: 60%;
+}
+
+.node_table td {
+    height: 26px;
+    text-align: left;
+    border: solid 2px #fefeff;
+}
+
+.node_table button {
+    margin-top: 5px;
+}
+.tdHead1{
+    background-color: #E4EBF5;
+}
+.user-view-td{
+    width: 260px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/**********************************************登录部分********************************************/
+#loginpage {
+    background: url("../images/login/background.png") no-repeat;
+    height: 100%;
+    width: 100%;
+    background-size: 100% 100%;
+}
+.d_divide_line{
+    background: url("../images/login/logo_font.png") no-repeat center center;
+    background-size:100%;
+    width:30%;
+    margin:auto;
+    height:0.3%;
+}
+#d_logintitle span{
+    color:#5FC7EC;
+}
+.d_input_box{
+    width:280px;
+    height:25px !important;
+    font-size:20px !important;
+    outline:none;
+    background:transparent;
+    border-style: solid  !important;
+    border-top-width: 0px  !important;
+    border-right-width: 0px  !important;
+    border-bottom-width: 1px  !important;
+    border-color:#5FC7EC  !important;
+    border-left-width: 0px  !important;
+    background-color:rgba(0,0,0,0) !important;
+    color:#cbe1f1 !important;
+}
+
+@media screen and (max-height: 1081px){
+    .d_input_text{
+        width:100%;
+        margin-top:80px;
+        height:18%;
+        text-align:center;
+        color:#5FC7EC;
+        font-size:22px;
+    }
+}
+@media screen and (max-height: 901px){
+    .d_input_text{
+        width:100%;
+        margin-top:80px;
+        height:22%;
+        text-align:center;
+        color:#5FC7EC;
+        font-size:20px;
+    }
+}
+
+.login_input_anthCode{
+    width:160px;
+    height:25px !important;
+    font-size:20px !important;
+    background:transparent;
+    background-color:rgba(0,0,0,0) !important;
+    border-color:#5FC7EC  !important;
+    color:#cbe1f1 !important;
+}
+/********************************************NTP校时部分************************************************/
+.timeing {
+    border: 1px solid #354992;
+    width: 300px;
+    height: 180px;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.set_title {
+    width: 100%;
+    height: 25px;
+    background-color: #354992;
+}
+.time_input {
+    padding: 5px;
+    width: 175px;
+    height: 26px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: #354992;
+}
+.ntp_time_input {
+    padding: 5px;
+    width: auto;
+    height: 26px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: #354992;
+}
+
+/**********************************************电视墙部分*********************************************/
+#scene_wall_main table th {
+    background-color: #354992;
+    color: white;
+    border: dotted lightslategrey;
+    border-width: 0px 1px 1px 0px;
+    padding: 0px 0px;
+}
+
+/********************************************高级配置管理部分*******************************************/
+li.seniorConfig{
+    height: 50px;
+    font-size: 15px;
+}
+ul.seniorConfig{
+    height: 600px;
+}

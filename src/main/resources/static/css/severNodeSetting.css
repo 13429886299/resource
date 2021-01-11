@@ -1,0 +1,18 @@
+#serverLabel {
+    margin-left: 10px;
+}
+
+#serverLabelTab tr {
+    line-height: 30px;
+}
+
+#serverLabelTab td {
+    padding-left: 15px;
+    padding-top: 10px;
+}
+
+#btn-node {
+    margin-top: 10px;
+    margin-left: 200px;
+}
+

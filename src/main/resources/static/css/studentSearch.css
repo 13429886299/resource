@@ -1,0 +1,54 @@
+#searchTab {
+    margin-top: 10px;
+}
+
+#searchTab tr, #studentInfoTab tr {
+    line-height: 30px;
+}
+
+#searchTab td, #studentInfoTab td {
+    padding-left: 5px;
+}
+
+#studentInfoTab {
+    margin-top: 15px;
+    margin-left: 15px;
+    border: 2px solid #cad8e8;
+    /*border-spacing: 5px 5px;*/
+    /*border-collapse: collapse;*/
+    height: auto;
+    width: 100%;
+}
+
+#studentInfoTab td {
+    padding: 8px;
+    line-height: 1.42857143;
+    /*vertical-align: top;*/
+    /*display: table-cell;*/
+    /*border: 2px solid #cad8e8;*/
+}
+
+#studentInfoTab tr:nth-child(odd) {
+    background-color: #E4EBF5;
+}
+
+#studentTab {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+#studentDetail {
+    background-color: #E4EBF5;
+}
+
+#studentTab tr:first-child td {
+    padding-left: 0;
+}
+
+.studentTab {
+    margin-top: 20px;
+    height: -webkit-calc(100% - 100px);
+    height: -moz-calc(100% - 100px);
+    height: calc(100% - 100px);
+    text-align: center;
+}

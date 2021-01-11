@@ -1,0 +1,59 @@
+
+.importAndExportTableDiv {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+/*********页面保存数据的等待效果****************/
+.background {
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    background: #C0C0C0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+}
+
+.progressBar {
+    border: solid 2px #86A5AD;
+    background: no-repeat 10px 10px;
+}
+
+.progressBar {
+    display: block;
+    width: 200px;
+    height: 80px;
+    position: fixed;
+    top: 22%;
+    left: 25%;
+    margin-left: -74px;
+    margin-top: -14px;
+    padding: 10px 10px 10px 50px;
+    text-align: left;
+    line-height: 27px;
+    font-weight: bold;
+    position: absolute;
+    z-index: 2001;
+}
+
+.importAndExportTab tr {
+    line-height: 30px;
+}
+
+.importAndExportTab tr:nth-child(1) {
+    line-height: 20px;
+}
+
+.importAndExportTab td {
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.importAndExportTab th {
+    padding-left: 10px;
+    padding-top: 10px;
+}

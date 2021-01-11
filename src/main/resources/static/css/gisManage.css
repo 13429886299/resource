@@ -1,0 +1,85 @@
+.textDivMap {
+    padding: 5px;
+    width: 280px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: #354992;
+}
+
+.labelFont {
+    float: left;
+}
+
+.textDivResolutions {
+    padding: 5px;
+    width: 280px;
+    height: 150px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: #354992;
+}
+
+.textDivMap_url_wpf {
+    padding: 5px;
+    width: 280px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: #354992;
+}
+
+.dolControlNoSelect {
+    bottom: 0em;
+    right: 3px;
+    display: block;
+    position: absolute;
+    font-family: Arial;
+    font-size: smaller
+}
+
+.mapManageUploadButton {
+    height: 30px;
+    width: 90px;
+    border: 1px solid #354992;
+    background-color: #354992;
+    color: white;
+    margin-left: 70px;
+}
+
+.chooseFile {
+    float: left;
+    width: 40%;
+}
+#topContent {
+    width: 450px;
+    height: 150px;
+    border: solid 1px #354992;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.topContent {
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+#dowContent {
+    width: 450px;
+    height: 400px;
+    border: solid 1px #354992;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.dowContent {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+#dowContent tr {
+    margin-bottom: 10px;
+    line-height: 40px;
+}
+
+#dowContent input, select {
+    margin-left: 10px;
+}

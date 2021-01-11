@@ -1,0 +1,32 @@
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<div id="loginpage" ng-controller="loginController">
+    <div class="d_head">
+
+    </div>
+    <div class="d_content">
+        <div id="d_logintitle"><span>逐梦轮滑学生录入管理系统</span></div>
+    </div>
+    <div class="d_divide_line"></div>
+    <div class="d_input_text">
+        用户名：
+        <input id="login_input_user" type="text" ng-model="user.name" size="12" class="d_input_box"><br/><br/>
+        密&nbsp;&nbsp;&nbsp;&nbsp;码：
+        <input id="login_input_pwd" type="password" ng-model="user.password" size="12" class="d_input_box"><br/><br/>
+        <!--<div ng-init="renovate()">-->
+            <!--验证码：-->
+            <!--<input class="login_input_anthCode" id="showAuthCode" type="text" ng-model="showAuthCode"/>-->
+            <!--<img ng-click="renovate()" ng-src="{{regUrl}}" id="validateCode"/><label ng-click="renovate()"-->
+                                                                                     <!--id="refreshLabel"><span-->
+                <!--style="color:#5FC7EC;font-size: 16px">&nbsp;&nbsp;刷新</span></label>-->
+        <!--</div>-->
+    </div>
+    <div id="d_error">
+        <span id="tips" style="color: red;">{{errortips}}</span>
+    </div>
+    <div id="d_search">
+        <button id="d_btnSearch" ng-click="loginCtrl()"><span style="color:#5FC7EC;">登&nbsp;&nbsp;&nbsp;&nbsp;录</span>
+        </button>
+        <button id="btnCancel" ng-click="clear()"><span style="color:#5FC7EC;">取&nbsp;&nbsp;&nbsp;&nbsp;消</span>
+        </button>
+    </div>
+</div>

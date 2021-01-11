@@ -1,0 +1,18 @@
+#orgConfirm, #orgDownload {
+    /*padding: 3px;*/
+    margin: 3px;
+    /*margin-right: 20px;*/
+    /*width: 77px;*/
+    /*height: 30px;*/
+    /*color: #ffffff;*/
+    /*background-color: #354992;*/
+    /*line-height: 20px;*/
+    /*border: none;*/
+}
+
+.org_input {
+    padding: 4px;
+    width: 280px;
+    height: 26px;
+    border: 1px solid #354992;
+}

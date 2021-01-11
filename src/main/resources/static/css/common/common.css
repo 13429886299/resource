@@ -1,0 +1,65 @@
+#work-area {
+    position: absolute;
+    width: 75%;
+    height: 100%;
+    left: 37%;
+    overflow: auto;
+}
+
+.work-area-content {
+    width: 100%;
+    height: 100%;
+    /*padding-top: 20px;*/
+    padding-left: 20px;
+    overflow: auto;
+}
+
+.input_text {
+    width: 180px;
+    height: 28px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000000;
+}
+
+.button_save, .button_cancel {
+    color: #FFFFFF;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 20px;
+    border-radius: 3px;
+}
+
+.importantFlag {
+    margin-left: 5px;
+    color: #FF0000;
+}
+
+.centerLine {
+    height: 20px;
+    border-style: solid;
+    border-color: #354992;
+    border-width: 1px 0 0 0;
+}
+
+input {
+    line-height: normal;
+}
+
+.tableButton {
+    margin-top: 10px;
+    float: left;
+    margin-left: 28%;
+}
+
+.buttonSave {
+    float: left;
+    margin-left: 10px;
+}
+.tableButton1{
+    float: left;
+    margin-left: 10.8%;
+    margin-top: 10px;
+}
