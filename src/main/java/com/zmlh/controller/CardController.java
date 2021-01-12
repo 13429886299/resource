@@ -1,14 +1,14 @@
 package com.zmlh.controller;
 
 
+import com.alibaba.fastjson.JSON;
+import com.zmlh.entity.Lesson;
 import com.zmlh.entity.Response;
 import com.zmlh.server.CardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @ClassName DictServerImpl
@@ -19,23 +19,22 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 
 @RestController
-@RequestMapping("/zmlh/cardId")
+@RequestMapping("/zmlh/card")
 @Slf4j
 public class CardController {
 
     @Autowired
-    CardService cardService;
+    private CardService cardService;
 
-    @RequestMapping(value = "/{cardId}", method = RequestMethod.GET)
-    public Response editStudentLessons ( @PathVariable String cardId ) {
-        log.info("收取到的会员卡号是：" + cardId);
-        return cardService.editStudentLessons(cardId);
+    @RequestMapping(value = "/lesson", method = RequestMethod.POST)
+    public Response editStudentLessons (  @Validated @RequestBody Lesson lesson ) {
+        log.info("需要扣除和记录的信息是：" + JSON.toJSONString(lesson));
+        return cardService.editStudentLessons(lesson.getCardId(), lesson.getCoachId(), lesson.getTime());
     }
 
-    @RequestMapping(value = "/card", method = RequestMethod.GET)
+    @RequestMapping(value = "/cardId", method = RequestMethod.GET)
     public Response getCardId () {
         log.info("开始获取学生卡信息");
         return cardService.getCardId();
     }
-
 }

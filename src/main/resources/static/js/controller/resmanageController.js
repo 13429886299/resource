@@ -2,7 +2,7 @@
  * Created by xcz on 2016/11/11.
  */
 /**资源管理控制器 ********************************************************************************************************/
-define(['angular', 'app', 'layer', 'service/resmanageService', 'service/layoutService', 'service/utilService',], function (angular, app, layer) {
+define(['angular', 'app', 'layer', 'service/resmanageService', 'service/layoutService', 'service/utilService'], function (angular, app, layer) {
     console.log('resmanage controller init...');
     app.controller('resmanageController', function ($scope, resmanageService, layoutService, utilService, $log) {
         //页面高度自适应布局
@@ -18,29 +18,36 @@ define(['angular', 'app', 'layer', 'service/resmanageService', 'service/layoutSe
         };
         var curTNode = {};
         init();
-        //默认隐藏PC机，摄像机界面
         $scope.BigLevels = [];
         $scope.SmallLevels = [];
-        $scope.Sexs = [{id: "man", name: "男"}, {id: "woman", name: "女"}];
+        $scope.Sexs = [];
 
         function init() {
-            //开始获取大等级
-            resmanageService.getBigLevel(function (data) {
+            resmanageService.getDict(function (data) {
                 if (data && data.length > 0) {
-                    for (var i = 0, length = data.length; i < length; i++) {
-                        $scope.BigLevels.push({id: data[i].dictKey, name: data[i].dictValue})
+                    var length = data.length;
+                    for (var i = 0; i < length; i++) {
+                        var dictAllInfoList = data[i].dictAllInfoList;
+                        debugger
+                        if (data[i].id == 1) {
+                            for (var j = 0, l = dictAllInfoList.length; j < l; j++) {
+                                $scope.BigLevels.push({id: dictAllInfoList[j].code, name: dictAllInfoList[j].value})
+                            }
+                        }
+                        if (data[i].id == 2) {
+                            for (var j = 0, l = dictAllInfoList.length; j < l; j++) {
+                                $scope.SmallLevels.push({id: dictAllInfoList[j].code, name: dictAllInfoList[j].value})
+                            }
+                        }
+                        if (data[i].id == 4) {
+                            for (var j = 0, l = dictAllInfoList.length; j < l; j++) {
+                                $scope.Sexs.push({id: dictAllInfoList[j].code, name: dictAllInfoList[j].value})
+                            }
+                        }
                     }
+                }
+            });
 
-                }
-            });
-            //开始获取小等级
-            resmanageService.getSmallLevel(function (data) {
-                if (data && data.length > 0) {
-                    for (var i = 0, length = data.length; i < length; i++) {
-                        $scope.SmallLevels.push({id: data[i].dictKey, name: data[i].dictValue})
-                    }
-                }
-            });
             //加载树数据
             resmanageService.loadTreeData(function (data) {
                 $('#tree').bind('select_node.jstree', function (e) {

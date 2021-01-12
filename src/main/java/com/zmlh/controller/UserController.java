@@ -43,11 +43,6 @@ public class UserController {
         return userServer.insert(resUserTab);
     }
 
-    @PostMapping("/update")
-    public Response update ( @Validated @RequestBody ResUserTab resUserTab ) {
-        log.info("更新用户信息！");
-        return userServer.update(resUserTab);
-    }
 
     @DeleteMapping("/delete/{id}")
     public Response delete ( @Validated @NotNull @PathVariable String id ) {

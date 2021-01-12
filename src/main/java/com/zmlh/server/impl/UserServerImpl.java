@@ -33,12 +33,7 @@ public class UserServerImpl implements UserServer {
 
     @Override
     public Response insert ( ResUserTab resUserTab ) {
-        if (userMapper.selectById(resUserTab.getId()) == null) {
-            resUserTab.setId(creatId());
-            resUserTab.setCreateTime(Instant.now()).setUpdateTime(Instant.now());
-            return new Response().setCode(200).setObject(userMapper.insert(resUserTab));
-        }
-        return update(resUserTab);
+        return insert(userMapper, resUserTab, resUserTab.getId());
     }
 
     @Override

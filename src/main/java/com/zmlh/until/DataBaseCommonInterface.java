@@ -9,6 +9,7 @@ import com.zmlh.entity.Response;
  * @Date 2021-01-08 9:44
  * @Version 1.0
  **/
+
 public interface DataBaseCommonInterface<T> {
     Response getAll ();
 

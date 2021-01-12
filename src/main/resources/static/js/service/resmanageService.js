@@ -10,7 +10,7 @@ define(['app', 'layer', 'md5', 'jstree', 'uuid', 'service/utilService', 'ng_file
         var curTNodeService = {};
         var oldCardId;
         //中队的资源id集合,目的是 切换中队的图标
-        var baseUrl = "/roller/resource";
+        var baseUrl = "/zmlh";
 //*************************************************资源树操作模块*************************************
         var status = "add";
         //获取资源和设备树的原始数据
@@ -19,18 +19,23 @@ define(['app', 'layer', 'md5', 'jstree', 'uuid', 'service/utilService', 'ng_file
         };
 
         function loadtreeData(cb) {
-            $http.get(baseUrl + '/allStudent')
+            $http.get(baseUrl + '/resource/student')
                 .then(function (data) {
                     var d = data.data;
-                    console.log("d---" + JSON.stringify(d));
-                    //对得到的数据进行排序
-                    originResourceData = d;
-                    createJsData();
-                    // sortData(d);
-                    cb("");
+                    if (d.code == 200) {
+                        console.log("d---" + JSON.stringify(d));
+                        //对得到的数据进行排序
+                        originResourceData = d.object;
+                        console.log("originResourceData" + JSON.stringify(originResourceData));
+                        createJsData();
+                        // sortData(d);
+                        cb("");
+                    } else {
+                        layer.alert(d.object);
+                    }
                 })
                 .catch(function (e) {
-                    layer.alert('加载资源失败' + e);
+                    layer.alert('加载资源失败');
                 });
 
         }
@@ -352,14 +357,14 @@ define(['app', 'layer', 'md5', 'jstree', 'uuid', 'service/utilService', 'ng_file
                 layer.alert("会员卡已经被" + obj.name + "使用了");
                 return;
             }
-            $http.post(baseUrl + "/student", student)
+            $http.post(baseUrl + "/resource/student", student)
                 .then(function (d, s, l) {
                     var data = d.data;
                     oldCardId = student.num;
-                    if (data.result != -1) {
+                    if (data.code == 200) {
                         if (status != "modify") {
                             originResourceData.push({
-                                resourceId: data.id,
+                                resourceId: data.object,
                                 resourceName: student.userName,
                                 parentId: student.pid,
                                 resourceType: "student",
@@ -374,7 +379,6 @@ define(['app', 'layer', 'md5', 'jstree', 'uuid', 'service/utilService', 'ng_file
                                     used: student.used,
                                     remarks: student.remarks,
                                     num: student.num,
-                                    filePath: student.importFilePath,
                                     startTime: student.startTime,
                                     endTime: student.endTime,
                                     cardId: student.cardId,
@@ -403,7 +407,6 @@ define(['app', 'layer', 'md5', 'jstree', 'uuid', 'service/utilService', 'ng_file
                                             used: student.used,
                                             remarks: student.remarks,
                                             num: student.num,
-                                            filePath: student.importFilePath,
                                             startTime: student.startTime,
                                             endTime: student.endTime,
                                             cardId: student.cardId,
@@ -489,30 +492,15 @@ define(['app', 'layer', 'md5', 'jstree', 'uuid', 'service/utilService', 'ng_file
             }
         }
 
-        //获取字典表的地方
-        this.getBigLevel = function (cb) {
-            $http.get(baseUrl + "/bigLevel")
+        this.getDict = function (cb) {
+            $http.get(baseUrl + "/dict/all/select")
                 .then(function (d) {
+                    debugger;
                     var data = d.data;
                     if (data.code == 200) {
-                        cb(JSON.parse(data.message))
+                        cb(data.object)
                     } else {
-                        cb([]);
-                    }
-                })
-                .catch(function (e) {
-                    layer.alert('获取大等级失败！');
-                });
-        };
-
-        this.getSmallLevel = function (cb) {
-            $http.get(baseUrl + "/smallLevel")
-                .then(function (d) {
-                    var data = d.data;
-                    if (data.code == 200) {
-                        cb(JSON.parse(data.message))
-                    } else {
-                        cb([]);
+                        layer.alert(data.message);
                     }
                 })
                 .catch(function (e) {
@@ -531,7 +519,7 @@ define(['app', 'layer', 'md5', 'jstree', 'uuid', 'service/utilService', 'ng_file
                     }
                 })
                 .catch(function (e) {
-                    layer.alert('获取小等级等级失败！');
+                    layer.alert('活得卡号失败');
                 });
         };
 

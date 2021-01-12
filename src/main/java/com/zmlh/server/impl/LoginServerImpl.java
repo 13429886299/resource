@@ -44,8 +44,10 @@ public class LoginServerImpl extends AbstractExceptionHandler implements LoginSe
         queryWrapper.eq("name", loginInfo.getUser());
         List<LoginInfo> loginInfoList = loginMapper.selectList(queryWrapper);
         if (loginInfoList.size() == 1) {
-            if (md5Str.equals(loginInfoList.get(0).getPwd())) {
-                loginInfo.setUserName(LoginDictionary.LOGIN_ADMIN).setRoleId(0);
+            if (loginInfo.getPwd().equals(loginInfoList.get(0).getPwd())) {
+                loginInfo.setUserName(LoginDictionary.LOGIN_ADMIN)
+                        .setRoleId(0)
+                        .setId(loginInfoList.get(0).getId());
                 return new Response().setCode(200).setObject(loginInfo);
             } else {
                 exceptionHandler(LoginDictionary.LOGIN_PWD_ERR, LoginException.class);
@@ -56,7 +58,9 @@ public class LoginServerImpl extends AbstractExceptionHandler implements LoginSe
         if (userTabList.size() == 1) {
             ResUserTab resUserTab = userTabList.get(0);
             if (md5Str.equals(resUserTab.getPwd())) {
-                loginInfo.setUserName(resUserTab.getUserName()).setRoleId(resUserTab.getRoleId());
+                loginInfo.setUserName(resUserTab.getUserName())
+                        .setRoleId(resUserTab.getRoleId())
+                        .setId(resUserTab.getId());
                 return new Response().setCode(200).setObject(loginInfo);
             } else {
                 exceptionHandler(LoginDictionary.LOGIN_PWD_ERR, LoginException.class);

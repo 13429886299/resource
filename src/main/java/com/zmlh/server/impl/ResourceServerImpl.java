@@ -39,7 +39,7 @@ public class ResourceServerImpl implements ResourceServer {
         Map<String, StudentInfoTab> studentInfoTabMap = listToMap(studentInfoTabList, "id");
         if (resNodeTabList.size() > 0) {
             resNodeTabList.forEach(resNodeTab -> {
-                Map<String, Object> map = new HashMap<>();
+                Map<String, Object> map = new HashMap<>(16);
                 switch (resNodeTab.getType()) {
                     case "student":
                         student(map, studentInfoTabMap, resNodeTab.getId());
@@ -52,6 +52,11 @@ public class ResourceServerImpl implements ResourceServer {
                 resultResourceList.add(new ResultResource(resNodeTab.getId(), resNodeTab.getPid(), resNodeTab.getName(), resNodeTab.getType(), map));
             });
         }
+        resultResourceList.add(new ResultResource().setResourceId("root")
+                .setParentId("rot")
+                .setResourceName("逐梦")
+                .setResourceType("node")
+                .setResourceDesc(new HashMap<>(16)));
         return new Response().setCode(200).setObject(resultResourceList);
     }
 

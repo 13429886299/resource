@@ -2,7 +2,7 @@
  * Created by xcz on 2016/11/7.
  */
 /**登录控制器 ********************************************************************************************************/
-define(['angular', 'app', 'layer', 'jquery', 'md5', 'service/loginService'], function (angular, app, layer) {
+define(['angular', 'app', 'layer', 'jquery', 'md5', 'service/loginService'], function (angular, app) {
     console.log('login controller init...');
     app.controller('loginController', function ($scope, $timeout, loginService, $state) {
         $("#errormesg").hide();
@@ -27,8 +27,10 @@ define(['angular', 'app', 'layer', 'jquery', 'md5', 'service/loginService'], fun
                 loginService.login($scope.user.name, psw, function (data) {
                     if (data.code == 200) {
                         //设置cookie
+                        var reslut = data.object;
+                        // $log.info("===" + JSON.stringify(data));
                         window.localStorage.setItem("currentLoginUsername", $scope.user.name);
-                        setCookie($scope.user.name, psw);
+                        setCookie(reslut.id, $scope.user.name, psw);
                         $state.go('main.resourceManage');
                     } else {
                         $scope.errortips = data.message;
@@ -49,7 +51,7 @@ define(['angular', 'app', 'layer', 'jquery', 'md5', 'service/loginService'], fun
             }
         };
 
-        function setCookie(userName, password) {
+        function setCookie(userId, userName, password) {
             //获取当前时间
             var date = new Date();
             var expiresTime = 600;
@@ -58,6 +60,7 @@ define(['angular', 'app', 'layer', 'jquery', 'md5', 'service/loginService'], fun
             //将userName和password两个cookie设置为60分钟后过期
             document.cookie = "userName=" + userName + ";expires=" + date.toGMTString();
             document.cookie = "password=" + password + ";expires=" + date.toGMTString();
+            document.cookie = "userId=" + userId + ";expires=" + date.toGMTString();
         }
 
         // enter键登录
@@ -67,13 +70,6 @@ define(['angular', 'app', 'layer', 'jquery', 'md5', 'service/loginService'], fun
                 $scope.loginCtrl();
                 $scope.$apply();
             }
-        };
-        $scope.renovate = function () {
-            loginService.getCode(function (data) {
-                console.log("验证码获取成功");
-                $scope.regUrl = URL.createObjectURL(data);
-                $scope.$applyAsync();
-            });
         };
     });
 });

@@ -50,6 +50,7 @@ public class MyExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Object handleException ( Exception ex ) {
+        log.info("Exception:" + ex.getClass().getName());
         return new Response().setCode(500).setObject(ex.getMessage());
     }
 }

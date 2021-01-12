@@ -3,14 +3,18 @@ package com.zmlh.server.impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.zmlh.entity.ResRecordLessonTab;
 import com.zmlh.entity.Response;
 import com.zmlh.entity.StudentInfoTab;
 import com.zmlh.mapper.StudentMapper;
 import com.zmlh.server.CardService;
+import com.zmlh.server.RecordLessonServer;
 import jcumf.umf_javacall;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
 
 /**
  * @ClassName DictServerImpl
@@ -24,9 +28,11 @@ import org.springframework.stereotype.Service;
 public class CardServiceImpl implements CardService {
     @Autowired
     private StudentMapper studentMapper;
+    @Autowired
+    private RecordLessonServer recordLessonServer;
 
     @Override
-    public Response editStudentLessons ( String cardId ) {
+    public Response editStudentLessons ( String cardId, String coachId, Instant time ) {
         log.info("开始扣除学生剩余课程");
         Response response = new Response();
         QueryWrapper<StudentInfoTab> queryWrapper = new QueryWrapper<>();
@@ -41,11 +47,16 @@ public class CardServiceImpl implements CardService {
                 updateWrapper.eq("cardId", cardId);
                 studentMapper.update(new StudentInfoTab().setUsed(used).setRemain(remain), updateWrapper);
                 response.setObject("扣除课程成功，还剩" + remain + "节课");
+                recordLessonServer.insert(new ResRecordLessonTab()
+                        .setLessonType(studentInfo.getLevelSmall())
+                        .setCoachId(coachId)
+                        .setStudentId(studentInfo.getId())
+                        .setCustomerTime(time)
+                );
             } else {
                 response.setObject("对不起，你的课程已经用完了");
                 log.info(studentInfo.getUserName() + "的课程已经用完了");
             }
-
         }
         return response;
     }

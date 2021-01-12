@@ -2,6 +2,8 @@ package com.zmlh.until;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zmlh.entity.Response;
+import com.zmlh.mapper.ResNodeTabMapper;
+import com.zmlh.mapper.StudentMapper;
 import lombok.SneakyThrows;
 
 import java.io.Serializable;
@@ -28,15 +30,16 @@ public interface BaseDatabaseInterface<T> extends DataBaseCommonInterface<T> {
         return UUID.randomUUID().toString().substring(0, 32).replace("-", "");
     }
 
-    default Response insert ( BaseMapper mapper, T t, Serializable id ) {
-        if (mapper.selectById(id) == null) {
+    default Response insert ( BaseMapper<T> mapper, T t, Serializable serializable ) {
+        if (mapper.selectById(serializable) == null) {
             Field[] fields = t.getClass().getDeclaredFields();
+            String id = creatId();
             Arrays.asList(fields).forEach(field -> {
                 String setMethods = SET + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1);
                 try {
                     Method method = t.getClass().getMethod(setMethods, field.getType());
                     if (ID.equals(field.getName())) {
-                        method.invoke(t, creatId());
+                        method.invoke(t, id);
                     }
                     if (field.getType().isAssignableFrom(Instant.class)) {
                         method.invoke(t, Instant.now());
@@ -44,9 +47,9 @@ public interface BaseDatabaseInterface<T> extends DataBaseCommonInterface<T> {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             });
-            return new Response().setCode(200).setObject(mapper.insert(t));
+            mapper.insert(t);
+            return new Response().setCode(200).setObject(id);
         }
         return update(t);
     }
@@ -66,7 +69,7 @@ public interface BaseDatabaseInterface<T> extends DataBaseCommonInterface<T> {
     }
 
     @SneakyThrows
-    default <S> S getS ( Map<String, S> sMap, String key, Class<S> sClass ) {
+    default <S> S getBean ( Map<String, S> sMap, String key, Class<S> sClass ) {
         S s = sMap.get(key);
         return s == null ? sClass.newInstance() : s;
     }

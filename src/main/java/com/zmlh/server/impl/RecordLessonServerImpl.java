@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class RecordLessonServerImpl implements RecordLessonServer {
     @Autowired
     private DictAllInfoMapper dictAllInfoMapper;
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
 
     @Override
     public Response getAll () {
@@ -49,8 +50,8 @@ public class RecordLessonServerImpl implements RecordLessonServer {
         query.eq(ID, 2);
         List<DictAllInfo> dictList = dictAllInfoMapper.selectList(query);
         resRecordLessonTabList.forEach(resRecordLessonTab ->
-                resRecordLessonTab.setStudentName(getS(studentMap, resRecordLessonTab.getStudentId(), StudentInfoTab.class).getUserName())
-                        .setCoachName(getS(userMap, resRecordLessonTab.getCoachId(), ResUserTab.class).getUserName())
+                resRecordLessonTab.setStudentName(getBean(studentMap, resRecordLessonTab.getStudentId(), StudentInfoTab.class).getUserName())
+                        .setCoachName(getBean(userMap, resRecordLessonTab.getCoachId(), ResUserTab.class).getUserName())
                         .setLessonName(
                                 dictList.stream()
                                         .filter(dict -> dict.getCode().equals(resRecordLessonTab.getLessonType()))
@@ -73,7 +74,9 @@ public class RecordLessonServerImpl implements RecordLessonServer {
 
     @Override
     public Response insert ( ResRecordLessonTab resRecordLessonTab ) {
-        return null;
+        resRecordLessonTab.setId(creatId());
+        resRecordLessonTab.setCreateTime(Instant.now());
+        return new Response().setCode(200).setObject(recordLessonMapper.insert(resRecordLessonTab));
     }
 
     @Override
@@ -83,6 +86,6 @@ public class RecordLessonServerImpl implements RecordLessonServer {
 
     @Override
     public Response delete ( String id ) {
-        return null;
+        return new Response().setCode(200).setObject(recordLessonMapper.deleteById(id));
     }
 }
