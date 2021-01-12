@@ -1,0 +1,167 @@
+<link rel="stylesheet" type="text/css" href="css/resmanage.css">
+<div ng-controller="resmanageController">
+    <div id="tree-area">
+        <div class="row-fluid dropdown" style="background-color: #B1B1B1;height:25px;">
+            <a id="dLabel" role="button" data-toggle="dropdown" class="btnwhite" data-target="#" href="javascript:;">
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                <!--<li><a href="javascript:;" ng-click="addPC()" data-index="6" data-title="添加PC端">添加PC端</a>-->
+                <!--</li>-->
+                <li><a href="javascript:;" ng-click="addStudent()" data-index="6" data-title="添加学生">添加学生</a>
+                </li>
+                <!--<li><a href="javascript:;" ng-click="addVoiceDispatch()" data-index="6" data-title="添加扬声调度">添加扬声调度</a>-->
+                <!--</li>-->
+                <!--<li><a href="javascript:;" ng-click="addFX()" data-index="6" data-title="添加FX设备">添加FX设备</a>-->
+                <!--</li>-->
+                <!--<li><a href="javascript:;" ng-click="addDVD()" data-index="6" data-title="添加DVD">添加DVD</a>-->
+                <!--</li>-->
+                <!--<li><a href="javascript:" ng-click="addLPB()" data-index="3" data-title="添加音箱">添加音箱</a>-->
+                <!--</li>-->
+                <!--<li><a data-index="4" ng-click="addNumberAudio()" href="javascript:;"-->
+                <!--data-title="添加数字音频处理器">添加数字音频处理器</a>-->
+                <!--</li>-->
+                <!--<li><a data-index="4" ng-click="addNumberMeetingHost()" href="javascript:;"-->
+                <!--data-title="添加数字会议主机">添加数字会议主机</a>-->
+                <!--</li>-->
+            </ul>
+        </div>
+        <div id="jstree_area">
+            <div id="tree"></div>
+        </div>
+    </div>
+    <div class="column info" id="work-area">
+        <div class="work-area-content">
+            <div class="container-fluid">
+                <!--<div class="resmanage" id="departInfo-in">-->
+                <!--<table id="departTab">-->
+                <!--<tr>-->
+                <!--<td><label>单位名称：</label></td>-->
+                <!--<td><input class="input_text" type="text"-->
+                <!--ng-model="departInfo.orgName" disabled><span-->
+                <!--class="importantFlag">*</span></td>-->
+                <!--<td><label class=departLabelLeft>编制类型：</label>-->
+                <!--</td>-->
+                <!--<td><select class="input_text" ng-model="departInfo.orgDesc">-->
+                <!--<option ng-repeat="x in DepartsDescs" value="{{x.id}}">{{x.name}}</option>-->
+                <!--</select></td>-->
+                <!--</tr>-->
+                <!--&lt;!&ndash;编制、实际人员&ndash;&gt;-->
+                <!--<tr>-->
+                <!--<td><label>编制数：</label></td>-->
+                <!--<td><input type="text" class="input_text" ng-model="departInfo.compileNum"></td>-->
+                <!--<td><label class=departLabelLeft>实力数：</label></td>-->
+                <!--<td><input type="text" class="input_text" ng-model="departInfo.soldierNum"></td>-->
+                <!--</tr>-->
+                <!--&lt;!&ndash;内线、外线电话&ndash;&gt;-->
+                <!--<tr>-->
+                <!--<td><label>内线电话：</label></td>-->
+                <!--<td><input type="text" class="input_text" ng-model="departInfo.interiorPhone"></td>-->
+                <!--<td><label class=departLabelLeft>外线电话：</label></td>-->
+                <!--<td><input type="text" class="input_text" ng-model="departInfo.outsidePhone"></td>-->
+                <!--</tr>-->
+                <!--&lt;!&ndash;邮编、地址&ndash;&gt;-->
+                <!--<tr>-->
+                <!--<td><label>邮编：</label></td>-->
+                <!--<td><input type="text" class="input_text" ng-model="departInfo.postcode"></td>-->
+                <!--<td><label class=departLabelLeft>地址：</label></td>-->
+                <!--<td><input type="text" class="input_text" ng-model="departInfo.address"></td>-->
+                <!--</tr>-->
+                <!--&lt;!&ndash;车辆,电话&ndash;&gt;-->
+                <!--<tr>-->
+                <!--<td><label>车辆数量：</label></td>-->
+                <!--<td><input type="text" class="input_text" ng-model="departInfo.carNum"></td>-->
+                <!--<td><label class=departLabelLeft>电话数量：</label></td>-->
+                <!--<td><input type="text" class="input_text" ng-model="departInfo.phoneNum"></td>-->
+                <!--</tr>-->
+                <!--&lt;!&ndash;摄像机,哨位台&ndash;&gt;-->
+                <!--<tr>-->
+                <!--<td><label>摄像机数：</label></td>-->
+                <!--<td><input type="text" class="input_text" ng-model="departInfo.cameraNum"></td>-->
+                <!--<td><label class=departLabelLeft>哨位台数：</label></td>-->
+                <!--<td><input type="text" class="input_text" ng-model="departInfo.sentryNum"></td>-->
+                <!--</tr>-->
+                <!--&lt;!&ndash;枪,炮&ndash;&gt;-->
+                <!--<tr>-->
+                <!--<td><label>枪支数量：</label></td>-->
+                <!--<td><input type="text" class="input_text" ng-model="departInfo.gunNum"></td>-->
+                <!--<td><label>弹药数量：</label></td>-->
+                <!--<td><input type="text" class="input_text" ng-model="departInfo.bullet"></td>-->
+                <!--</tr>-->
+                <!--<tr id="dutyroomDefTelInfo">-->
+                <!--<td><label>默认电话：</label></td>-->
+                <!--<td><select id="ct_tel" class="input_text" ng-model="departInfo.defTelphone">-->
+                <!--<option ng-repeat="x in dutyroomDelTels" value="{{x.resourceId}}">{{x.resourceName}}-->
+                <!--</option>-->
+                <!--</select></td>-->
+                <!--<td><label class=departLabelLeft>默认视频：</label></td>-->
+                <!--<td><select id="ct_eq" class="input_text" ng-model="departInfo.defVideo">-->
+                <!--<option ng-repeat="x in dutyroomDelVideos" value="{{x.resourceId}}">{{x.resourceName}}-->
+                <!--</option>-->
+                <!--</select></td>-->
+                <!--</tr>-->
+                <!--</table>-->
+                <!--<div style="margin-left: 510px;margin-top: 3px">-->
+                <!--<button class="button_save" ng-click="saveDepart()">-->
+                <!--保存-->
+                <!--</button>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div id="camera">-->
+                <!--<table id="cameraTab">-->
+                <!--<tr>-->
+                <!--<td>摄像机名称：</td>-->
+                <!--<td><input class="input_text" type="text"-->
+                <!--ng-model="camera.name" disabled><span-->
+                <!--class="importantFlag">*</span></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<td>IP地址：</td>-->
+                <!--<td><input class="input_text" type="text"-->
+                <!--ng-model="camera.ip" disabled><span-->
+                <!--class="importantFlag">*</span></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<td>安装位置：</td>-->
+                <!--<td><input class="input_text" type="text"-->
+                <!--ng-model="camera.address"><span-->
+                <!--class="importantFlag">*</span></td>-->
+                <!--</tr>-->
+                <!--</table>-->
+                <!--<div style="margin-left: 235px;margin-top: 3px">-->
+                <!--<button class="button_save" ng-click="saveCamera()">-->
+                <!--保存-->
+                <!--</button>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div id="student">
+                    <div><span>姓名：</span><input type="text" ng-model="student.userName"></div>
+                    <div><span>别名：</span><input type="text" ng-model="student.smallName"></div>
+                    <div><span>性别：</span>
+                        <select ng-model="student.sex">
+                            <option ng-repeat="x in Sexs" value="{{x.id}}">{{x.name}}</option>
+                        </select>
+                    </div>
+                    <div><span>电话：</span><input type="text" ng-model="student.phone"></div>
+                    <div><span>学校：</span><input type="text" ng-model="student.school"></div>
+                    <div><span>大等级：</span><select ng-model="student.levelBig">
+                        <option ng-repeat="x in BigLevels" value="{{x.id}}">{{x.name}}</option>
+                    </select></div>
+                    <div><span>小等级：</span><select ng-model="student.levelSmall">
+                        <option ng-repeat="x in SmallLevels" value="{{x.id}}">{{x.name}}</option>
+                    </select></div>
+                    <div><span>总课时：</span><input type="text" ng-model="student.allHours"></div>
+                    <div><span>已使用：</span><input type="text" ng-model="student.used"></div>
+                    <div><span>备注：</span><textarea ng-model="student.remarks"></textarea></div>
+                    <div>
+                        <button ng-click="saveStudent()" id="button_save">保存</button>
+                    </div>
+                    <div>
+                        <button ng-click="clearStudent()" class="button_cancel">取消</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
