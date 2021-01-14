@@ -1,7 +1,14 @@
 package com.zmlh.server.impl;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.EasyExcelFactory;
+import com.alibaba.excel.ExcelReader;
+import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.metadata.Sheet;
+import com.alibaba.excel.metadata.Table;
+import com.alibaba.excel.read.metadata.ReadSheet;
+import com.alibaba.excel.write.builder.ExcelWriterBuilder;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zmlh.dictionary.ExcelDictionary;
@@ -10,6 +17,7 @@ import com.zmlh.entity.Response;
 import com.zmlh.entity.ScheduleTimeTab;
 import com.zmlh.mapper.ScheduleTimeMapper;
 import com.zmlh.server.ScheduleTimeServer;
+import com.zmlh.until.ExcelReadListener;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @ClassName ScheduleTimeServerImpl
@@ -62,10 +68,19 @@ public class ScheduleTimeServerImpl implements ScheduleTimeServer {
     }
 
     @Override
+    @SneakyThrows(Exception.class)
     public Response insertExcel ( MultipartFile file, String season ) {
         log.info("文件名是：" + file.getOriginalFilename());
-
-
+        ExcelReadListener excelReadListener = new ExcelReadListener(season);
+        ExcelReader reader = EasyExcelFactory.read(file.getInputStream(), excelReadListener).build();
+        // 读取Sheet,从第0行开始读取(表示从表头开始读)
+        ReadSheet readSheet = EasyExcel.readSheet(0).build();
+        reader.read(readSheet);
+        reader.finish();
+        List<String> head = excelReadListener.getHead();
+        System.out.println(JSON.toJSONString(head));
+        List<List<String>> data = excelReadListener.getData();
+        System.out.println(JSON.toJSONString(data));
         return null;
     }
 
@@ -79,17 +94,16 @@ public class ScheduleTimeServerImpl implements ScheduleTimeServer {
         response.setHeader("Cache-Control", "no-store");
         response.addHeader("Cache-Control", "max-age=0");
         response.flushBuffer();
-        List<ExcelFile> excelFileList = new ArrayList<>();
+        List<List<String>> list = new ArrayList<>();
+        list.add(Collections.singletonList(ExcelDictionary.TIME));
         if (Objects.nonNull(scheduleTimeTabList) && scheduleTimeTabList.size() > 0) {
-            ExcelFile excelFile = new ExcelFile().setTitle(ExcelDictionary.TEMPLATE);
-            int lessonNum = scheduleTimeTabList.size();
-            for (int i = 0; i < lessonNum; i++) {
-                ExcelFile.class.getDeclaredField(ExcelDictionary.BASE_FILE + i).getAnnotation(ExcelProperty.class).value();
-//                ExcelFile.class.getMethod(SET + ExcelDictionary.BASE_FILE + i, String.class).invoke(excelFile, scheduleTimeTabList.get(i).getSchedule());
-            }
-            excelFileList.add(excelFile);
+            scheduleTimeTabList.forEach(scheduleTimeTab -> {
+                List<String> heard = new ArrayList<>();
+                heard.add(scheduleTimeTab.getSchedule());
+                list.add(heard);
+            });
         }
-        log.info("写入Excel的数据是：" + JSON.toJSONString(excelFileList));
-        EasyExcel.write(response.getOutputStream(), ExcelFile.class).sheet("").doWrite(excelFileList);
+        log.info("表头参数是：" + JSON.toJSONString(list));
+        EasyExcel.write(response.getOutputStream()).sheet(ExcelDictionary.TEMPLATE).head(list).doWrite(new ArrayList());
     }
 }

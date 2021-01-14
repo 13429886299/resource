@@ -10,7 +10,7 @@ package com.zmlh.dictionary;
 public interface ExcelDictionary {
     String FILE_NAME = "逐梦轮滑课程安排表";
     String TIME = "时间";
-    String TEMPLATE = "课表模板";
+    String TEMPLATE = "课表";
     String BASE_FILE = "time";
 
 }
