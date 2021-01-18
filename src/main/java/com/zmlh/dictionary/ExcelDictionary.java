@@ -12,5 +12,5 @@ public interface ExcelDictionary {
     String TIME = "时间";
     String TEMPLATE = "课表";
     String BASE_FILE = "time";
-
+    String FUTURE_PRESENT = "只能导入今天或以后的课表";
 }

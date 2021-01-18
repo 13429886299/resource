@@ -3,9 +3,11 @@ package com.zmlh.server.impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.zmlh.entity.ExcelSchedule;
 import com.zmlh.entity.ResRecordLessonTab;
 import com.zmlh.entity.Response;
 import com.zmlh.entity.StudentInfoTab;
+import com.zmlh.mapper.ExcelScheduleMapper;
 import com.zmlh.mapper.StudentMapper;
 import com.zmlh.server.CardService;
 import com.zmlh.server.RecordLessonServer;
@@ -30,6 +32,8 @@ public class CardServiceImpl implements CardService {
     private StudentMapper studentMapper;
     @Autowired
     private RecordLessonServer recordLessonServer;
+    @Autowired
+    private ExcelScheduleMapper excelScheduleMapper;
 
     @Override
     public Response editStudentLessons ( String cardId, String coachId, Instant time ) {
@@ -53,6 +57,7 @@ public class CardServiceImpl implements CardService {
                         .setStudentId(studentInfo.getId())
                         .setCustomerTime(time)
                 );
+                excelScheduleMapper.update(new ExcelSchedule().setCheck(1), new UpdateWrapper<ExcelSchedule>().eq("studentId", studentInfo.getId()));
             } else {
                 response.setObject("对不起，你的课程已经用完了");
                 log.info(studentInfo.getUserName() + "的课程已经用完了");

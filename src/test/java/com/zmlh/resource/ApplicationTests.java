@@ -26,18 +26,7 @@ class ApplicationTests {
     @Test
     @SneakyThrows
     void contextLoads () {
-        String path = "C:\\Users\\7\\Desktop\\逐梦轮滑课程安排表.xlsx";
-        InputStream inputStream = new FileInputStream(path);
-        ExcelReadListener excelReadListener = new ExcelReadListener();
-        ExcelReader reader = EasyExcelFactory.read(inputStream, excelReadListener).build();
-        // 读取Sheet,从第0行开始读取(表示从表头开始读)
-        ReadSheet readSheet = EasyExcel.readSheet(0).build();
-        reader.read(readSheet);
-        reader.finish();
-        List<String> head = excelReadListener.getHead();
-        System.out.println(JSON.toJSONString(head));
-        List<List<String>> data = excelReadListener.getData();
-        System.out.println(JSON.toJSONString(data));
+
     }
 
 }
