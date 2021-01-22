@@ -4,12 +4,15 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.read.metadata.ReadSheet;
+import com.alibaba.excel.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.zmlh.dictionary.ExcelDictionary;
 import com.zmlh.entity.*;
-import com.zmlh.mapper.*;
+import com.zmlh.mapper.DictAllInfoMapper;
+import com.zmlh.mapper.ScheduleTimeMapper;
+import com.zmlh.mapper.StudentMapper;
 import com.zmlh.server.ScheduleTimeServer;
 import com.zmlh.until.ExcelReadListener;
 import lombok.SneakyThrows;
@@ -17,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import sun.util.calendar.ZoneInfo;
 
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
@@ -26,7 +28,7 @@ import java.time.Instant;
 import java.util.*;
 
 /**
- * @ClassName AbstractExcelScheduleServer
+ * @ClassName ExcelScheduleServerImpl
  * @Description TODO
  * @Author tyh
  * @Date 2021-01-13 15:25
@@ -34,7 +36,7 @@ import java.util.*;
  **/
 @Service
 @Slf4j
-public class ExcelScheduleServer implements ScheduleTimeServer {
+public class ExcelScheduleServerImpl implements ScheduleTimeServer {
     @Autowired
     private ScheduleTimeMapper scheduleTimeMapper;
     @Autowired
@@ -42,11 +44,28 @@ public class ExcelScheduleServer implements ScheduleTimeServer {
     @Autowired
     private DictAllInfoMapper dictAllInfoMapper;
     @Autowired
-    AbstractExcelScheduleServer abstractExcelScheduleServer;
+    private AbstractExcelScheduleServer abstractExcelScheduleServer;
 
     @Override
     public Response getAll () {
-        return new Response().setCode(200).setObject(scheduleTimeMapper.selectList(new QueryWrapper<>()));
+        List<ExcelSchedule> excelScheduleList = abstractExcelScheduleServer.list();
+        List<StudentInfoTab> studentInfoTabList = studentMapper.selectList(new QueryWrapper<>());
+        List<DictAllInfo> dictAllInfoList = dictAllInfoMapper.selectList(new QueryWrapper<DictAllInfo>().eq("id", 2));
+        excelScheduleList.forEach(excelSchedule ->
+                excelSchedule.setStudentName(studentInfoTabList.stream()
+                        .filter(studentInfoTab -> studentInfoTab.getId().equals(excelSchedule.getStudentId()))
+                        .findAny().orElse(new StudentInfoTab().setUserName(StringUtils.EMPTY))
+                        .getUserName()
+                )
+                        .setCheckName()
+                        .setTypeName(dictAllInfoList.stream()
+                                .filter(dictAllInfo -> dictAllInfo.getCode().toString().equals(excelSchedule.getType()))
+                                .findAny()
+                                .orElse(new DictAllInfo().setValue(StringUtils.EMPTY))
+                                .getValue()
+                        )
+        );
+        return new Response().setCode(200).setObject(excelScheduleList);
     }
 
     @Override
@@ -117,7 +136,6 @@ public class ExcelScheduleServer implements ScheduleTimeServer {
                 })
         );
         abstractExcelScheduleServer.saveBatch(excelScheduleList);
-
         log.info("需要保存的课表信息是：" + JSON.toJSONString(excelScheduleList));
         return new Response().setCode(200);
     }

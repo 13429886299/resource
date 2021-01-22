@@ -57,7 +57,7 @@ public class LoginServerImpl implements LoginServer, AbstractExceptionHandler {
         List<ResUserTab> userTabList = userMapper.selectList(queryWrapper);
         if (userTabList.size() == 1) {
             ResUserTab resUserTab = userTabList.get(0);
-            if (md5Str.equals(resUserTab.getPwd())) {
+            if (loginInfo.getPwd().equals(resUserTab.getPwd())) {
                 loginInfo.setUserName(resUserTab.getUserName())
                         .setRoleId(resUserTab.getRoleId())
                         .setId(resUserTab.getId());

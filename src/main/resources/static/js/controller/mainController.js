@@ -28,6 +28,7 @@ define(['angular', 'app', 'layer', 'jquery', 'service/mainService', 'service/lay
             newPassword: "",
             newPasswordAgain: ""
         };
+        $scope.roleid = getCookie("roleId");
 
         //获取cookies
         function getCookie(name) {
@@ -69,8 +70,7 @@ define(['angular', 'app', 'layer', 'jquery', 'service/mainService', 'service/lay
             }
         };
         /***********************************************************************************************************/
-        var idArr = ['orgManage', 'serverNodeSetting', 'mainMenuNode', 'offNet', 'gisManage', 'gisMapView',
-            'resourceManage', 'timing', 'powerReboot', 'importAndExport', 'resetPassword'];
+        var idArr = ['orgManage', 'serverNodeSetting', 'mainMenuNode', 'resourceManage', 'timing', "addUser", 'powerReboot', 'importAndExport', 'resetPassword'];
         $scope.tabSwitch = function (id) {
             idArr.forEach(function (obj) {
                 if (id == obj) {

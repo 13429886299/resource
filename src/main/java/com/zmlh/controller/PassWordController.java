@@ -28,9 +28,9 @@ public class PassWordController {
         return passWordServer.update(pwd);
     }
 
-    @GetMapping("/reset/{userId}/{login}")
+    @PutMapping("/reset/{userId}/{login}")
     public Response restPwd ( @UserCheck @PathVariable String login, @PathVariable String userId ) {
-        log.info("重装密码的人是：" + login);
+        log.info("重置密码的人是：" + login);
         return passWordServer.restPwd(userId);
     }
 }

@@ -32,7 +32,7 @@ public class PassWordServerImpl implements PassWordServer {
     @Override
     public Response update ( Pwd pwd ) {
         UpdateWrapper updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq("name", pwd.getPwd());
+        updateWrapper.eq("name", pwd.getUser());
         if (LoginDictionary.ADMIN.equals(pwd.getUser().toLowerCase())) {
             return new Response()
                     .setCode(200)

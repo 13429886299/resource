@@ -1,7 +1,7 @@
 package com.zmlh.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zmlh.entity.ExcelSchedule;
+import com.zmlh.until.RootMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +14,5 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 @Mapper
-public interface ExcelScheduleMapper extends BaseMapper<ExcelSchedule> {
+public interface ExcelScheduleMapper extends RootMapper<ExcelSchedule> {
 }

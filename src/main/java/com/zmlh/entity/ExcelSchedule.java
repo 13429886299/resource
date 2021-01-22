@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zmlh.dictionary.ExcelDictionary;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.time.Instant;
+import java.util.List;
 
 /**
  * @ClassName ExcelSchedule
@@ -35,4 +37,22 @@ public class ExcelSchedule {
     private Integer check;
     @TableField(value = "season")
     private String season;
+
+    @TableField(exist = false)
+    private String studentName;
+    @TableField(exist = false)
+    private String checkName;
+    @TableField(exist = false)
+    private String typeName;
+
+    public ExcelSchedule setCheckName () {
+        if (this.check == -1) {
+            this.checkName = ExcelDictionary.CHECK;
+        } else if (this.check == 0) {
+            this.checkName = ExcelDictionary.NO;
+        } else {
+            this.checkName = ExcelDictionary.YES;
+        }
+        return this;
+    }
 }

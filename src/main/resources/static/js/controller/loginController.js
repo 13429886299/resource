@@ -30,7 +30,7 @@ define(['angular', 'app', 'layer', 'jquery', 'md5', 'service/loginService'], fun
                         var reslut = data.object;
                         // $log.info("===" + JSON.stringify(data));
                         window.localStorage.setItem("currentLoginUsername", $scope.user.name);
-                        setCookie(reslut.id, $scope.user.name, psw);
+                        setCookie(reslut.id, reslut.roleId, reslut.userName, psw);
                         $state.go('main.resourceManage');
                     } else {
                         $scope.errortips = data.message;
@@ -51,16 +51,18 @@ define(['angular', 'app', 'layer', 'jquery', 'md5', 'service/loginService'], fun
             }
         };
 
-        function setCookie(userId, userName, password) {
+        function setCookie(userId, roleId, userName, password) {
             //获取当前时间
             var date = new Date();
             var expiresTime = 600;
             //将date设置为60分钟以后的时间
             date.setTime(date.getTime() + expiresTime * 60000);
             //将userName和password两个cookie设置为60分钟后过期
+            document.cookie = "user=" + $scope.user.name + ";expires=" + date.toGMTString();
             document.cookie = "userName=" + userName + ";expires=" + date.toGMTString();
             document.cookie = "password=" + password + ";expires=" + date.toGMTString();
             document.cookie = "userId=" + userId + ";expires=" + date.toGMTString();
+            document.cookie = "roleId=" + roleId + ";expires=" + date.toGMTString();
         }
 
         // enter键登录
