@@ -35,7 +35,14 @@ define([], function () {
                 url: "/resmanage",
                 dependencies: ["controller/resmanageController"],
                 allowAnonymous: true
-            }
+            },
+            "main.importExcelSchedule": {
+                templateUrl: "views/manageSchedule.html",
+                url: "/manageSchedule",
+                dependencies: ["controller/manageScheduleController"],
+                allowAnonymous: true
+            },
+
         }
     }
 });

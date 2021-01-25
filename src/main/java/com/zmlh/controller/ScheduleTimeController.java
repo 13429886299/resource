@@ -36,6 +36,13 @@ public class ScheduleTimeController {
         return scheduleTimeServer.getAll();
     }
 
+    @GetMapping("/select/{pageNo}/{pageSize}")
+    @ResponseBody
+    public Response getBaseSharePage ( @PathVariable int pageNo, @PathVariable int pageSize ) {
+        log.info("开始分页获取排课安排信息");
+        return scheduleTimeServer.getPage(pageNo, pageSize);
+    }
+
     @PostMapping("/insert")
     public Response insert ( @RequestBody ScheduleTimeTab scheduleTimeTab ) {
         return scheduleTimeServer.insert(scheduleTimeTab);
@@ -57,5 +64,6 @@ public class ScheduleTimeController {
         log.info("开始上传");
         scheduleTimeServer.getModelExcel(season, response);
     }
+
 
 }

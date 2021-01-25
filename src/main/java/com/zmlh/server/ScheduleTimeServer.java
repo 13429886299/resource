@@ -19,4 +19,6 @@ public interface ScheduleTimeServer extends BaseDatabaseInterface<ScheduleTimeTa
     Response insertExcel ( MultipartFile file, String season, Instant time );
 
     void getModelExcel ( String season, HttpServletResponse response );
+
+    Response getPage ( int pageNo, int pageSize );
 }

@@ -1,0 +1,29 @@
+<div ng-controller="manageScheduleController">
+    <div>
+        <div style="float: left">
+            <span>课表时间: </span>
+            <span>{{week[0]|date:'yyyy年MM月dd日'}}</span>
+            <span>-</span>
+            <span>{{week[6]|date:'yyyy年MM月dd日'}}</span>
+            <input type="text" id="d12" class="selectdate" ng-model="chooseDate" ng-change="dateChange()"
+                   onclick="WdatePicker({lang:'zh-cn',onpicked:pickedFunc})"/>
+        </div>
+        <div style="float: left">
+            <button value="模板下载" ng-click="excelModelDownload()"></button>
+        </div>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    function pickedFunc() {
+        $('#d12').change();
+    }
+</script>

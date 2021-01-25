@@ -70,7 +70,7 @@ define(['angular', 'app', 'layer', 'jquery', 'service/mainService', 'service/lay
             }
         };
         /***********************************************************************************************************/
-        var idArr = ['orgManage', 'serverNodeSetting', 'mainMenuNode', 'resourceManage', 'timing', "addUser", 'powerReboot', 'importAndExport', 'resetPassword'];
+        var idArr = ['manageSchedule', 'manageScheduleTime', 'mainMenuNode', 'resourceManage', 'timing', "addUser", 'resetPassword'];
         $scope.tabSwitch = function (id) {
             idArr.forEach(function (obj) {
                 if (id == obj) {

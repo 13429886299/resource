@@ -8,6 +8,8 @@ import com.alibaba.excel.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zmlh.dictionary.ExcelDictionary;
 import com.zmlh.entity.*;
 import com.zmlh.mapper.DictAllInfoMapper;
@@ -49,23 +51,22 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
     @Override
     public Response getAll () {
         List<ExcelSchedule> excelScheduleList = abstractExcelScheduleServer.list();
-        List<StudentInfoTab> studentInfoTabList = studentMapper.selectList(new QueryWrapper<>());
-        List<DictAllInfo> dictAllInfoList = dictAllInfoMapper.selectList(new QueryWrapper<DictAllInfo>().eq("id", 2));
-        excelScheduleList.forEach(excelSchedule ->
-                excelSchedule.setStudentName(studentInfoTabList.stream()
-                        .filter(studentInfoTab -> studentInfoTab.getId().equals(excelSchedule.getStudentId()))
-                        .findAny().orElse(new StudentInfoTab().setUserName(StringUtils.EMPTY))
-                        .getUserName()
-                )
-                        .setCheckName()
-                        .setTypeName(dictAllInfoList.stream()
-                                .filter(dictAllInfo -> dictAllInfo.getCode().toString().equals(excelSchedule.getType()))
-                                .findAny()
-                                .orElse(new DictAllInfo().setValue(StringUtils.EMPTY))
-                                .getValue()
-                        )
-        );
+        setValue(excelScheduleList);
         return new Response().setCode(200).setObject(excelScheduleList);
+    }
+
+
+    @Override
+    public Response getPage ( int pageNo, int pageSize ) {
+        IPage<ExcelSchedule> excelSchedulePage = new Page<>(pageNo, pageSize);
+        IPage<ExcelSchedule> excelScheduleListPage = abstractExcelScheduleServer.getBaseMapper().selectPage(excelSchedulePage, new QueryWrapper<>());
+        List<ExcelSchedule> excelScheduleList = new ArrayList<>();
+        if (Objects.nonNull(excelScheduleListPage)) {
+            excelScheduleList = excelScheduleListPage.getRecords();
+        }
+        setValue(excelScheduleList);
+        excelScheduleListPage.setRecords(excelScheduleList);
+        return new Response().setCode(200).setObject(excelScheduleListPage);
     }
 
     @Override
@@ -163,5 +164,22 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
         EasyExcel.write(response.getOutputStream()).sheet(ExcelDictionary.TEMPLATE).head(list).doWrite(new ArrayList());
     }
 
-
+    private void setValue ( List<ExcelSchedule> excelScheduleList ) {
+        List<StudentInfoTab> studentInfoTabList = studentMapper.selectList(new QueryWrapper<>());
+        List<DictAllInfo> dictAllInfoList = dictAllInfoMapper.selectList(new QueryWrapper<DictAllInfo>().eq("id", 2));
+        excelScheduleList.forEach(excelSchedule ->
+                excelSchedule.setStudentName(studentInfoTabList.stream()
+                        .filter(studentInfoTab -> studentInfoTab.getId().equals(excelSchedule.getStudentId()))
+                        .findAny().orElse(new StudentInfoTab().setUserName(StringUtils.EMPTY))
+                        .getUserName()
+                )
+                        .setCheckName()
+                        .setTypeName(dictAllInfoList.stream()
+                                .filter(dictAllInfo -> dictAllInfo.getCode().toString().equals(excelSchedule.getType()))
+                                .findAny()
+                                .orElse(new DictAllInfo().setValue(StringUtils.EMPTY))
+                                .getValue()
+                        )
+        );
+    }
 }

@@ -35,6 +35,21 @@
                     </accordion-group>
                     <accordion-group>
                         <accordion-heading>
+                            <img class="menu-image" src="../images/icon/baseSetting.png" id="mainMenuExcelSchedule">
+                            <span class="menu-p1">课表管理</span>
+                            <img class="navigation-right" src="../images/icon/1-12.png"/>
+                        </accordion-heading>
+                        <ul>
+                            <li><a class="navigation-color" id="manageScheduleTime"
+                                   ng-click="tabSwitch('manageScheduleTime')"
+                                   ui-sref=".manageScheduleTime">课表时间</a></li>
+                            <li><a class="navigation-color" id="manageSchedule"
+                                   ng-click="tabSwitch('manageSchedule')"
+                                   ui-sref=".manageSchedule">课表安排</a></li>
+                        </ul>
+                    </accordion-group>
+                    <accordion-group>
+                        <accordion-heading>
                             <img class="menu-image" src="../images/icon/menuSystem.png" id="mainMenuUser">
                             <span class="menu-p1">用户管理</span>
                             <img class="navigation-right" src="../images/icon/1-12.png"/>
