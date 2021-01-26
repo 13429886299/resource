@@ -1,3 +1,57 @@
+GET http://127.0.0.1:8003/zmlh/schedule/select/2/3/2021-01-18T11:39:11.282Z
+Content-Type: application/json
+
+{"user":"admin","pwd":"e10adc3949ba59abbe56e057f20f883e"}
+
+<> 2021-01-26T034536.200.json
+
+###
+
+GET http://127.0.0.1:8003/zmlh/schedule/select/2/3/2021-01-18T11:39:11.282Z
+Content-Type: application/json
+
+{"user":"admin","pwd":"e10adc3949ba59abbe56e057f20f883e"}
+
+<> 2021-01-26T034501.200.json
+
+###
+
+GET http://127.0.0.1:8003/zmlh/schedule/select/2/3/2021-01-20T11:39:11.282Z
+Content-Type: application/json
+
+{"user":"admin","pwd":"e10adc3949ba59abbe56e057f20f883e"}
+
+<> 2021-01-26T032810.200.json
+
+###
+
+GET http://127.0.0.1:8003/zmlh/schedule/select/2/3/2021-01-19T11:39:11.282Z
+Content-Type: application/json
+
+{"user":"admin","pwd":"e10adc3949ba59abbe56e057f20f883e"}
+
+<> 2021-01-26T032237.200.json
+
+###
+
+GET http://127.0.0.1:8003/zmlh/schedule/select/2/3/2021-01-21T11:39:11.282Z
+Content-Type: application/json
+
+{"user":"admin","pwd":"e10adc3949ba59abbe56e057f20f883e"}
+
+<> 2021-01-26T032216.200.json
+
+###
+
+GET http://127.0.0.1:8003/zmlh/schedule/select/2/3/2021-01-22T11:39:11.282Z
+Content-Type: application/json
+
+{"user":"admin","pwd":"e10adc3949ba59abbe56e057f20f883e"}
+
+<> 2021-01-26T032204.200.json
+
+###
+
 GET http://127.0.0.1:8003/zmlh/schedule/select/2/3
 Content-Type: application/json
 
@@ -484,72 +538,6 @@ Content-Disposition: form-data; name="file"; filename="逐梦轮滑课程安排�
 --WebAppBoundary--
 
 <> 2021-01-15T043421.200.json
-
-###
-
-POST http://127.0.0.1:8003/zmlh/schedule/excel/4
-Content-Type: multipart/form-data; boundary=WebAppBoundary
-
---WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="逐梦轮滑课程安排表.xlsx"
-
-< C:\Users\7\Desktop\逐梦轮滑课程安排表.xlsx
---WebAppBoundary--
-
-###
-
-POST http://127.0.0.1:8003/zmlh/schedule/excel/4
-Content-Type: multipart/form-data; boundary=WebAppBoundary
-
---WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="逐梦轮滑课程安排表.xlsx"
-
-< C:\Users\7\Desktop\逐梦轮滑课程安排表.xlsx
---WebAppBoundary--
-
-###
-
-POST http://127.0.0.1:8003/zmlh/schedule/excel/4
-Content-Type: multipart/form-data; boundary=WebAppBoundary
-
---WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="逐梦轮滑课程安排表.xlsx"
-
-< C:\Users\7\Desktop\逐梦轮滑课程安排表.xlsx
---WebAppBoundary--
-
-###
-
-POST http://127.0.0.1:8003/zmlh/schedule/excel/4
-Content-Type: multipart/form-data; boundary=WebAppBoundary
-
---WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="逐梦轮滑课程安排表.xlsx"
-
-< C:\Users\7\Desktop\逐梦轮滑课程安排表.xlsx
---WebAppBoundary--
-
-###
-
-POST http://127.0.0.1:8003/zmlh/schedule/excel/4
-Content-Type: multipart/form-data; boundary=WebAppBoundary
-
---WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="逐梦轮滑课程安排表.xlsx"
-
-< C:\Users\7\Desktop\逐梦轮滑课程安排表.xlsx
---WebAppBoundary--
-
-###
-
-POST http://127.0.0.1:8003/zmlh/schedule/excel/4
-Content-Type: multipart/form-data; boundary=WebAppBoundary
-
---WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="逐梦轮滑课程安排表.xlsx"
-
-< C:\Users\7\Desktop\逐梦轮滑课程安排表.xlsx
---WebAppBoundary--
 
 ###
 

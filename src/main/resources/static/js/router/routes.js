@@ -36,7 +36,7 @@ define([], function () {
                 dependencies: ["controller/resmanageController"],
                 allowAnonymous: true
             },
-            "main.importExcelSchedule": {
+            "main.manageSchedule": {
                 templateUrl: "views/manageSchedule.html",
                 url: "/manageSchedule",
                 dependencies: ["controller/manageScheduleController"],

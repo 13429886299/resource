@@ -2,25 +2,64 @@
     <div>
         <div style="float: left">
             <span>课表时间: </span>
-            <span>{{week[0]|date:'yyyy年MM月dd日'}}</span>
-            <span>-</span>
-            <span>{{week[6]|date:'yyyy年MM月dd日'}}</span>
-            <input type="text" id="d12" class="selectdate" ng-model="chooseDate" ng-change="dateChange()"
+            <input id="d12" type="text" class="selectdate" ng-model="chooseDate" ng-change="dateChange()"
                    onclick="WdatePicker({lang:'zh-cn',onpicked:pickedFunc})"/>
         </div>
         <div style="float: left">
-            <button value="模板下载" ng-click="excelModelDownload()"></button>
+            <button ng-click="excelModelDownload()">模板下载</button>
         </div>
     </div>
-    <div>
-        <table>
-            <tr>
-                <td>
+    <!--<div>-->
+    <!--<div>-->
+    <!--<table>-->
+    <!--<tr>-->
+    <!--<td>-->
 
-                </td>
-            </tr>
-        </table>
-    </div>
+    <!--</td>-->
+    <!--</tr>-->
+    <!--</table>-->
+    <!--</div>-->
+    <!--<div class="text-center">-->
+    <!--<ul class="paginationTab">-->
+    <!--<li>-->
+    <!--<span style="color: grey;">第{{page}}页</span>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<span style="color: grey;">共{{pageSize}}页</span>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a ng-click="selectPage(1)">-->
+    <!--<span>[首页]</span>-->
+    <!--</a>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a ng-click="previous()">-->
+    <!--<span>[上一页]</span>-->
+    <!--</a>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a ng-click="next()">-->
+    <!--<span>[下一页]</span>-->
+    <!--</a>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a ng-click="selectPage(pageSize)">-->
+    <!--<span>[尾页]</span>-->
+    <!--</a>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<span style="color: grey;">跳到 <input type="text"-->
+    <!--style="width: 25px;height: 18px;padding: 0 5px;color: #446AB7;"-->
+    <!--ng-model="num"/> 页</span>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a ng-click="selectPage(num)">-->
+    <!--<span>[跳转]</span>-->
+    <!--</a>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</div>-->
 </div>
 <script>
     function pickedFunc() {

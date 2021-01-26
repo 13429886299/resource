@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -47,6 +48,7 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
     private DictAllInfoMapper dictAllInfoMapper;
     @Autowired
     private AbstractExcelScheduleServer abstractExcelScheduleServer;
+    private final static String TIME_FORMAT = "yyyy-MM-dd";
 
     @Override
     public Response getAll () {
@@ -57,9 +59,10 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
 
 
     @Override
-    public Response getPage ( int pageNo, int pageSize ) {
+    public Response getPage ( int pageNo, int pageSize, Instant time ) {
         IPage<ExcelSchedule> excelSchedulePage = new Page<>(pageNo, pageSize);
-        IPage<ExcelSchedule> excelScheduleListPage = abstractExcelScheduleServer.getBaseMapper().selectPage(excelSchedulePage, new QueryWrapper<>());
+        IPage<ExcelSchedule> excelScheduleListPage = abstractExcelScheduleServer.getBaseMapper()
+                .selectPage(excelSchedulePage, new QueryWrapper<ExcelSchedule>().eq("time", getStrTime(time, TIME_FORMAT)));
         List<ExcelSchedule> excelScheduleList = new ArrayList<>();
         if (Objects.nonNull(excelScheduleListPage)) {
             excelScheduleList = excelScheduleListPage.getRecords();
@@ -104,11 +107,8 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
         reader.read(readSheet).finish();
         Map<String, List<String>> listMap = excelReadListener.getMapList();
         log.info("获取到的Excel文件中的数据是：" + JSON.toJSONString(listMap));
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        simpleDateFormat.setTimeZone(TimeZone.getDefault());
-        String time = simpleDateFormat.format(Date.from(instant));
         List<ExcelSchedule> excelScheduleList = new ArrayList<>();
-        abstractExcelScheduleServer.getBaseMapper().delete(new UpdateWrapper<ExcelSchedule>().eq("season", season).eq("time", time));
+        abstractExcelScheduleServer.getBaseMapper().delete(new UpdateWrapper<ExcelSchedule>().eq("season", season).eq("time", getStrTime(instant, TIME_FORMAT)));
         listMap.forEach(( key, list ) ->
                 list.forEach(s -> {
                     int length = list.size() - 1;
@@ -143,8 +143,10 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
 
     @Override
     @SneakyThrows(Exception.class)
-    public void getModelExcel ( String season, HttpServletResponse response ) {
-        List<ScheduleTimeTab> scheduleTimeTabList = scheduleTimeMapper.selectList(new QueryWrapper<ScheduleTimeTab>().eq("season", season));
+    public void getModelExcel ( long time, HttpServletResponse response ) {
+        LocalDate localDate = LocalDate.ofEpochDay(new Date(time).toInstant().getEpochSecond());
+        log.info("时间日期是：" + localDate.toString());
+        List<ScheduleTimeTab> scheduleTimeTabList = scheduleTimeMapper.selectList(new QueryWrapper<ScheduleTimeTab>().eq("season", getSeason(localDate)));
         response.setCharacterEncoding("utf8");
         response.setContentType("application/vnd.ms-excel;charset=utf-8");
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(ExcelDictionary.FILE_NAME + ".xlsx", "UTF-8"));
@@ -181,5 +183,18 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
                                 .getValue()
                         )
         );
+    }
+
+    private String getStrTime ( Instant instant, String format ) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        simpleDateFormat.setTimeZone(TimeZone.getDefault());
+        return simpleDateFormat.format(Date.from(instant));
+    }
+
+    private int getSeason ( LocalDate date ) {
+        int month = date.getMonthValue();
+        int season = (int) Math.ceil(month / 3.0);
+        log.info("当前季节是：" + season);
+        return season;
     }
 }

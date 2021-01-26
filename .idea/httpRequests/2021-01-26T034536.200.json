@@ -1,0 +1,51 @@
+{
+  "code": 200,
+  "object": {
+    "records": [
+      {
+        "id": "6f3f60dce6e8495dbd6bffdda43e",
+        "scheduleTime": "10:30-11:30",
+        "studentId": "e664680e-f3e4-46e7-8c42-277713da1a16",
+        "time": "2021-01-18",
+        "type": "3",
+        "check": 0,
+        "season": "4",
+        "studentName": "小明",
+        "checkName": "否",
+        "typeName": "速滑"
+      },
+      {
+        "id": "f089f2ee6947420cbe5067be9c65",
+        "scheduleTime": "15:30-17:30",
+        "studentId": "e664680e-f3e4-46e7-8c42-277713da1a16",
+        "time": "2021-01-18",
+        "type": "4",
+        "check": 0,
+        "season": "4",
+        "studentName": "小明",
+        "checkName": "否",
+        "typeName": "平滑"
+      },
+      {
+        "id": "f2be6ff9aaec4dacb0260b051c4d",
+        "scheduleTime": "18:00-19:00",
+        "studentId": "721c1534-18d4-459d-8c68-9f78aa0dafe8",
+        "time": "2021-01-18",
+        "type": "2",
+        "check": 0,
+        "season": "4",
+        "studentName": "向安荣",
+        "checkName": "否",
+        "typeName": "提高"
+      }
+    ],
+    "total": 6,
+    "size": 3,
+    "current": 2,
+    "orders": [],
+    "optimizeCountSql": true,
+    "hitCount": false,
+    "searchCount": true,
+    "pages": 2
+  }
+}

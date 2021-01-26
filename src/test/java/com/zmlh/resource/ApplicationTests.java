@@ -15,18 +15,20 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 
-@SpringBootTest
+//@SpringBootTest
 class ApplicationTests {
 
 
     @Test
     @SneakyThrows
     void contextLoads () {
-
+        long localDate = LocalDate.now().toEpochDay();
+        System.out.println("111" + localDate);
     }
 
 }

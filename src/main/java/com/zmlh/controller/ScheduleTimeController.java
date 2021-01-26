@@ -1,5 +1,6 @@
 package com.zmlh.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zmlh.dictionary.ExcelDictionary;
 import com.zmlh.entity.Response;
 import com.zmlh.entity.ScheduleTimeTab;
@@ -14,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @ClassName ScheduleTimeController
@@ -36,11 +40,11 @@ public class ScheduleTimeController {
         return scheduleTimeServer.getAll();
     }
 
-    @GetMapping("/select/{pageNo}/{pageSize}")
+    @GetMapping("/select/{pageNo}/{pageSize}/{time}")
     @ResponseBody
-    public Response getBaseSharePage ( @PathVariable int pageNo, @PathVariable int pageSize ) {
+    public Response getBaseSharePage ( @PathVariable int pageNo, @PathVariable int pageSize, @PathVariable Instant time ) {
         log.info("开始分页获取排课安排信息");
-        return scheduleTimeServer.getPage(pageNo, pageSize);
+        return scheduleTimeServer.getPage(pageNo, pageSize, time);
     }
 
     @PostMapping("/insert")
@@ -59,10 +63,10 @@ public class ScheduleTimeController {
         return scheduleTimeServer.insertExcel(file, season, time);
     }
 
-    @GetMapping(value = "/excel/{season}")
-    public void getModelExcel ( @PathVariable String season, HttpServletResponse response ) {
-        log.info("开始上传");
-        scheduleTimeServer.getModelExcel(season, response);
+    @GetMapping(value = "/excel/{time}")
+    public void getModelExcel ( @PathVariable @NotNull long time, HttpServletResponse response ) {
+        log.info("开始下载Excel文件");
+        scheduleTimeServer.getModelExcel(time, response);
     }
 
 
