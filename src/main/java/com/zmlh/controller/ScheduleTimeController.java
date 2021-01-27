@@ -1,6 +1,5 @@
 package com.zmlh.controller;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zmlh.dictionary.ExcelDictionary;
 import com.zmlh.entity.Response;
 import com.zmlh.entity.ScheduleTimeTab;
@@ -15,9 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 /**
  * @ClassName ScheduleTimeController
@@ -57,10 +55,10 @@ public class ScheduleTimeController {
         return scheduleTimeServer.delete(id);
     }
 
-    @PostMapping(value = "/excel/{season}/{time}")
-    public Response insertExcel ( @NotNull @RequestBody MultipartFile file, @PathVariable String season, @PathVariable @FutureOrPresent(message = ExcelDictionary.FUTURE_PRESENT) Instant time ) {
+    @PostMapping(value = "/excel/{time}")
+    public Response insertExcel ( @NotNull @RequestBody MultipartFile file, @PathVariable @FutureOrPresent(message = ExcelDictionary.FUTURE_PRESENT) Instant time ) {
         log.info("开始上传Excel课表");
-        return scheduleTimeServer.insertExcel(file, season, time);
+        return scheduleTimeServer.insertExcel(file, time.atZone(ZoneId.systemDefault()));
     }
 
     @GetMapping(value = "/excel/{time}")

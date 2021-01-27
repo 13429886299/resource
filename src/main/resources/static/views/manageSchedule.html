@@ -1,68 +1,125 @@
 <div ng-controller="manageScheduleController">
-    <div>
-        <div style="float: left">
+    <div style="margin-top: 10px">
+        <div style="float: left;margin-left: 8px">
             <span>课表时间: </span>
-            <input id="d12" type="text" class="selectdate" ng-model="chooseDate" ng-change="dateChange()"
+            <input id="d12" type="text" class="selectdate input_text" ng-model="chooseDate" ng-change="dateChange()"
                    onclick="WdatePicker({lang:'zh-cn',onpicked:pickedFunc})"/>
+
+            <div style="position: absolute;left: 1723px;    top: 143px;" ng-show="timeCompare()">
+                <label for="uploadFile" class="button_import_excel">
+                    课表上传
+                </label>
+                <input type="file" style="display: none"
+                       onchange="angular.element(this).scope().importExcel(this.files)" id="uploadFile"
+                       name="uploadFile"/>
+            </div>
         </div>
-        <div style="float: left">
-            <button ng-click="excelModelDownload()">模板下载</button>
+
+        <div style="float: right;margin-right: 10px">
+            <button ng-click="excelModelDownload()" class="button_save">课表模板下载</button>
         </div>
     </div>
-    <!--<div>-->
-    <!--<div>-->
-    <!--<table>-->
-    <!--<tr>-->
-    <!--<td>-->
-
-    <!--</td>-->
-    <!--</tr>-->
-    <!--</table>-->
-    <!--</div>-->
-    <!--<div class="text-center">-->
-    <!--<ul class="paginationTab">-->
-    <!--<li>-->
-    <!--<span style="color: grey;">第{{page}}页</span>-->
-    <!--</li>-->
-    <!--<li>-->
-    <!--<span style="color: grey;">共{{pageSize}}页</span>-->
-    <!--</li>-->
-    <!--<li>-->
-    <!--<a ng-click="selectPage(1)">-->
-    <!--<span>[首页]</span>-->
-    <!--</a>-->
-    <!--</li>-->
-    <!--<li>-->
-    <!--<a ng-click="previous()">-->
-    <!--<span>[上一页]</span>-->
-    <!--</a>-->
-    <!--</li>-->
-    <!--<li>-->
-    <!--<a ng-click="next()">-->
-    <!--<span>[下一页]</span>-->
-    <!--</a>-->
-    <!--</li>-->
-    <!--<li>-->
-    <!--<a ng-click="selectPage(pageSize)">-->
-    <!--<span>[尾页]</span>-->
-    <!--</a>-->
-    <!--</li>-->
-    <!--<li>-->
-    <!--<span style="color: grey;">跳到 <input type="text"-->
-    <!--style="width: 25px;height: 18px;padding: 0 5px;color: #446AB7;"-->
-    <!--ng-model="num"/> 页</span>-->
-    <!--</li>-->
-    <!--<li>-->
-    <!--<a ng-click="selectPage(num)">-->
-    <!--<span>[跳转]</span>-->
-    <!--</a>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
+    <div style="margin-top: 10px">
+        <div ng-init="getTabData()">
+            <table class="table table-striped table-bordered text-center scheduleTimeTable">
+                <thead class="dutyHeadClass">
+                <th ng-repeat="x in scheduleTimeTitle">{{x}}</th>
+                </thead>
+                <tr ng-repeat="x in scheduleTimeData">
+                    <td hidden>{{x.id}}</td>
+                    <td>
+                        {{$index+1}}
+                    </td>
+                    <td>
+                        {{x.studentName}}
+                    </td>
+                    <td>
+                        {{x.time}}
+                    </td>
+                    <td>
+                        {{x.scheduleTime}}
+                    </td>
+                    <td>
+                        {{x.typeName}}
+                    </td>
+                    <td>
+                        {{x.checkName}}
+                    </td>
+                    <!--<td>-->
+                    <!--<button ng-show="x.check!=-1" ng-click="checkRecord()">确认</button>-->
+                    <!--</td>-->
+                </tr>
+            </table>
+        </div>
+        <div class="text-center">
+            <ul class="paginationTab">
+                <li>
+                    <span style="color: grey;">第{{pageNo}}页</span>
+                </li>
+                <li>
+                    <span style="color: grey;">共{{pageSize}}页</span>
+                </li>
+                <li>
+                    <a ng-click="selectPage(1)">
+                        <span>[首页]</span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="previous()">
+                        <span>[上一页]</span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="next()">
+                        <span>[下一页]</span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="selectPage(pageSize)">
+                        <span>[尾页]</span>
+                    </a>
+                </li>
+                <li>
+    <span style="color: grey;">跳到 <input type="text"
+                                         style="width: 25px;height: 18px;padding: 0 5px;color: #446AB7;"
+                                         ng-model="num"/> 页</span>
+                </li>
+                <li>
+                    <a ng-click="selectPage(num)">
+                        <span>[跳转]</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 <script>
     function pickedFunc() {
         $('#d12').change();
     }
 </script>
+<style>
+    .dutyHeadClass {
+        font-size: 13px;
+    }
+
+    .tablearea {
+        height: -webkit-calc(100% - 110px);
+        height: -moz-calc(100% - 110px);
+        height: calc(100% - 110px);
+        text-align: center;
+    }
+
+    .button_import_excel {
+        padding: 3px 10px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+        color: #fff;
+        background-color: #4697E8;
+        display: inline-block;
+        text-align: center;
+        border: 1px solid transparent;
+        cursor: pointer;
+    }
+</style>

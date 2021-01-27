@@ -28,7 +28,9 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName ExcelScheduleServerImpl
@@ -59,16 +61,19 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
 
 
     @Override
-    public Response getPage ( int pageNo, int pageSize, Instant time ) {
+    public Response getPage ( int pageNo, int pageSize, Instant instant ) {
         IPage<ExcelSchedule> excelSchedulePage = new Page<>(pageNo, pageSize);
+        String time = getStrTime(instant, TIME_FORMAT);
+        log.info("time:" + time);
         IPage<ExcelSchedule> excelScheduleListPage = abstractExcelScheduleServer.getBaseMapper()
-                .selectPage(excelSchedulePage, new QueryWrapper<ExcelSchedule>().eq("time", getStrTime(time, TIME_FORMAT)));
+                .selectPage(excelSchedulePage, new QueryWrapper<ExcelSchedule>().eq("time", time));
         List<ExcelSchedule> excelScheduleList = new ArrayList<>();
         if (Objects.nonNull(excelScheduleListPage)) {
             excelScheduleList = excelScheduleListPage.getRecords();
         }
         setValue(excelScheduleList);
         excelScheduleListPage.setRecords(excelScheduleList);
+        log.info("excelScheduleListPage:" + JSON.toJSONString(excelScheduleListPage));
         return new Response().setCode(200).setObject(excelScheduleListPage);
     }
 
@@ -95,8 +100,9 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
 
     @Override
     @SneakyThrows(Exception.class)
-    public Response insertExcel ( MultipartFile file, String season, Instant instant ) {
+    public Response insertExcel ( MultipartFile file, ZonedDateTime instant ) {
         log.info("文件名是：" + file.getOriginalFilename());
+        String season = getSeason(LocalDate.ofEpochDay(instant.toEpochSecond())) + "";
         List<ScheduleTimeTab> scheduleTimeTabList = scheduleTimeMapper.selectList(new QueryWrapper<ScheduleTimeTab>().eq("season", season));
         List<StudentInfoTab> studentInfoTabList = studentMapper.selectList(new QueryWrapper<>());
         List<DictAllInfo> dictAllInfoList = dictAllInfoMapper.selectList(new QueryWrapper<DictAllInfo>().eq("id", 2));
@@ -108,7 +114,9 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
         Map<String, List<String>> listMap = excelReadListener.getMapList();
         log.info("获取到的Excel文件中的数据是：" + JSON.toJSONString(listMap));
         List<ExcelSchedule> excelScheduleList = new ArrayList<>();
-        abstractExcelScheduleServer.getBaseMapper().delete(new UpdateWrapper<ExcelSchedule>().eq("season", season).eq("time", getStrTime(instant, TIME_FORMAT)));
+        String time = getStrTime(instant.toInstant(), TIME_FORMAT);
+        log.info("time:" + time);
+        abstractExcelScheduleServer.getBaseMapper().delete(new UpdateWrapper<ExcelSchedule>().eq("season", season).eq("time", time));
         listMap.forEach(( key, list ) ->
                 list.forEach(s -> {
                     int length = list.size() - 1;
@@ -116,7 +124,7 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
                         excelScheduleList.add(new ExcelSchedule()
                                 .setId(creatId())
                                 .setSeason(season)
-                                .setTime(instant)
+                                .setTime(instant.toInstant())
                                 .setScheduleTime(key)
                                 .setCheck(0)
                                 .setStudentId(studentInfoTabList.stream()
@@ -181,11 +189,13 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
                                 .findAny()
                                 .orElse(new DictAllInfo().setValue(StringUtils.EMPTY))
                                 .getValue()
+
                         )
         );
     }
 
-    private String getStrTime ( Instant instant, String format ) {
+    private  String getStrTime ( Instant instant, String format ) {
+        log.info("instant:" + instant.toString());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         simpleDateFormat.setTimeZone(TimeZone.getDefault());
         return simpleDateFormat.format(Date.from(instant));
@@ -197,4 +207,6 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
         log.info("当前季节是：" + season);
         return season;
     }
+
+
 }

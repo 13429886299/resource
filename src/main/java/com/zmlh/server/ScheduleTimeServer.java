@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -19,7 +20,7 @@ import java.util.Date;
  * @Version 1.0
  **/
 public interface ScheduleTimeServer extends BaseDatabaseInterface<ScheduleTimeTab> {
-    Response insertExcel ( MultipartFile file, String season, Instant time );
+    Response insertExcel ( MultipartFile file, ZonedDateTime time );
 
     void getModelExcel ( long season, HttpServletResponse response );
 
