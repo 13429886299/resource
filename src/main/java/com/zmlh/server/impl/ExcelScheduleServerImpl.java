@@ -54,9 +54,8 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
 
     @Override
     public Response getAll () {
-        List<ExcelSchedule> excelScheduleList = abstractExcelScheduleServer.list();
-        setValue(excelScheduleList);
-        return new Response().setCode(200).setObject(excelScheduleList);
+        List<ScheduleTimeTab> excelScheduleTimeList = scheduleTimeMapper.selectList(new QueryWrapper<>());
+        return new Response().setCode(200).setObject(excelScheduleTimeList);
     }
 
 
@@ -194,7 +193,7 @@ public class ExcelScheduleServerImpl implements ScheduleTimeServer {
         );
     }
 
-    private  String getStrTime ( Instant instant, String format ) {
+    private String getStrTime ( Instant instant, String format ) {
         log.info("instant:" + instant.toString());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         simpleDateFormat.setTimeZone(TimeZone.getDefault());

@@ -42,6 +42,12 @@ define([], function () {
                 dependencies: ["controller/manageScheduleController"],
                 allowAnonymous: true
             },
+            "main.manageScheduleTime": {
+                templateUrl: "views/manageScheduleTime.html",
+                url: "/manageSchedule",
+                dependencies: ["controller/manageScheduleTimeController"],
+                allowAnonymous: true
+            }
 
         }
     }

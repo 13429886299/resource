@@ -1,0 +1,23 @@
+<div ng-controller="manageScheduleTimeController">
+    <div><span>课程时间安排</span></div>
+    <div ng-init="getSeason()">
+        <div ng-model="season">{{seasonName}}</div>
+        <div ng-repeat="x in scheduleTimeList">
+            <table>
+                <tr>
+                    <th><span>第{{$index+1}}课</span></th>
+                </tr>
+                <tr>
+                    <td>开始时间:</td>
+                    <td><input id="springStartTime" type="text" class="input_text" ng-model="x.startTime"
+                               onclick="WdatePicker({lang:'zh-cn',onpicked:pickedFunc})"/></td>
+                </tr>
+                <tr>
+                    <td>结束时间:</td>
+                    <td><input id="springEndTime" type="text" class="input_text" ng-model="x.endTime"
+                               onclick="WdatePicker({lang:'zh-cn',onpicked:pickedFunc})"/></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

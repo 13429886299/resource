@@ -1,0 +1,20 @@
+.dutyHeadClass {
+    font-size: 13px;
+}
+
+.button_import_excel {
+    padding: 3px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #4697E8;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.scheduleTimeTable{
+    margin-top: 10px;
+}

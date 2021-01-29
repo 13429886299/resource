@@ -11,7 +11,6 @@ define(['angular', 'app', 'layer', 'jquery', 'service/manageScheduleService'], f
         };
 
         $scope.dateChange = function () {
-            console.log($scope.chooseDate);
             $scope.getTabData();
         };
 

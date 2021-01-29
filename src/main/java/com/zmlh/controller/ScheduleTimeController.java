@@ -32,7 +32,7 @@ public class ScheduleTimeController {
     @Autowired
     private ScheduleTimeServer scheduleTimeServer;
 
-    @GetMapping("/select")
+    @GetMapping("/time/select")
     public Response getAll () {
         log.info("获取所有的排课时间安排");
         return scheduleTimeServer.getAll();

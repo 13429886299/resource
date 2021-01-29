@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="css/manageSchedule.css">
 <div ng-controller="manageScheduleController">
     <div style="margin-top: 10px">
         <div style="float: left;margin-left: 8px">
@@ -5,25 +6,25 @@
             <input id="d12" type="text" class="selectdate input_text" ng-model="chooseDate" ng-change="dateChange()"
                    onclick="WdatePicker({lang:'zh-cn',onpicked:pickedFunc})"/>
 
-            <div style="position: absolute;left: 1723px;    top: 143px;" ng-show="timeCompare()">
+            <li style="position: absolute;top: 9%;left: 30%" ng-show="timeCompare()">
                 <label for="uploadFile" class="button_import_excel">
                     课表上传
                 </label>
                 <input type="file" style="display: none"
                        onchange="angular.element(this).scope().importExcel(this.files)" id="uploadFile"
                        name="uploadFile"/>
-            </div>
+            </li>
         </div>
 
         <div style="float: right;margin-right: 10px">
-            <button ng-click="excelModelDownload()" class="button_save">课表模板下载</button>
+            <button ng-click="excelModelDownload()" class="button_import_excel">课表模板下载</button>
         </div>
     </div>
-    <div style="margin-top: 10px">
+    <div style="padding-top: 3%">
         <div ng-init="getTabData()">
             <table class="table table-striped table-bordered text-center scheduleTimeTable">
                 <thead class="dutyHeadClass">
-                <th ng-repeat="x in scheduleTimeTitle">{{x}}</th>
+                <th ng-repeat="x in scheduleTimeTitle" style="text-align: center;vertical-align: middle!important;">{{x}}</th>
                 </thead>
                 <tr ng-repeat="x in scheduleTimeData">
                     <td hidden>{{x.id}}</td>
@@ -98,28 +99,3 @@
         $('#d12').change();
     }
 </script>
-<style>
-    .dutyHeadClass {
-        font-size: 13px;
-    }
-
-    .tablearea {
-        height: -webkit-calc(100% - 110px);
-        height: -moz-calc(100% - 110px);
-        height: calc(100% - 110px);
-        text-align: center;
-    }
-
-    .button_import_excel {
-        padding: 3px 10px;
-        font-size: 12px;
-        line-height: 1.5;
-        border-radius: 3px;
-        color: #fff;
-        background-color: #4697E8;
-        display: inline-block;
-        text-align: center;
-        border: 1px solid transparent;
-        cursor: pointer;
-    }
-</style>
